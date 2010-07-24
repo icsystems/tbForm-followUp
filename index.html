@@ -1,0 +1,487 @@
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Follow Up 90 dias - Preencha todos os campos do Formulário abaixo.</title>
+	<link rel="stylesheet" type="text/css" href="./css/form_style.css" /> 
+	<link rel="stylesheet" type="text/css" href="./css/page_style.css" />
+	<link rel="stylesheet" type="text/css" href="./css/JScrollPane.css" />
+	<link rel="stylesheet" type="text/css" href="./css/smoothness/jquery-ui.css" />
+	<script src='./js/jquery.js' type='text/javascript' > </script>
+	<script src='./js/JScrollPane.js' type='text/javascript' ></script>
+	<script src='./js/jquery-ui.js' type='text/javascript' ></script>
+	<script src='./js/jquery.form.js' type='text/javascript' ></script>
+	<script src='./js/jquery.validate.js' type='text/javascript' ></script>
+	<script src='./js/messages_ptbr.js' type='text/javascript' ></script>
+	<script src='./js/actions.js' type='text/javascript' ></script>
+</head>
+<body>
+<div id='menu'>
+	<ul>
+		<li><a href='#'>Formulários</a></li>
+		<li><a href='#'>Operaç&otilde;es</a></li>
+		<li><a href='#'>Análise</a></li>
+		<li><a href='#'>Listar</a></li>
+		<li><a href='#'>Backup</a></li>
+		<li class='help'><a href='#'>Ajuda</a></li>
+	</ul>
+</div>
+<div id='mainFrame'>
+<div id='divExames'>
+	Carregando <img src='images/loading.gif'>
+</div>
+<div id='content'>
+	<div id='title'>Novos Métodos Diagnósicos em TB pulmonar <br /> Policlínica Augusto Amaral Peixoto - SMS - RJ</div>
+	<div id='subtitle'><em>Follow-up</em> 90 dias</div>
+	<div id='maincontent'><form id='form_followup'>
+		<fieldset id='followup'>
+			<legend>Follow Up</legend>
+			<div id='divTratamentoPrescritoTB' class='primary'>
+				<label for='tratamentoPrescritoTB'>Tratamento prescrito para TB:</label>
+				<select name='tratamentoPrescritoTB' id='tratamentoPrescritoTB' class='selectOne'>
+					<option value='' > ------ </option>
+					<option value='sim'> Sim  </option>
+					<option value='nao'> N&atilde;o  </option>
+				</select>
+			</div>
+			<div id='divDataInicio' class='secondary'>
+				<label for='data_inicio'> Data do início:</label>
+				<input  name="data_inicio" id="data_inicio" type="text" />
+			</div>
+			<div id='divTratamentoPrescritoTBFarmaco' class='secondary'>
+				<fieldset>
+					<legend>Farmacos Utilizados</legend>
+					<label for='tratamentoPrescritoTBFarmacos_0' class='labelCheckbox'>
+					<input id='tratamentoPrescritoTBFarmacos_0' name="tratamentoPrescritoTBFarmacos" value="rifampicina"    type="checkbox" /> Rifampicina
+					</label>
+					<label for='tratamentoPrescritoTBFarmacos_1' class='labelCheckbox'>
+					<input id='tratamentoPrescritoTBFarmacos_1' name="tratamentoPrescritoTBFarmacos" value="isoniazida"     type="checkbox" /> Isoniazida
+					</label>
+					<label for='tratamentoPrescritoTBFarmacos_2' class='labelCheckbox'>
+					<input id='tratamentoPrescritoTBFarmacos_2' name="tratamentoPrescritoTBFarmacos" value="pirazinamida"   type="checkbox" /> Pirazinamida
+					</label>
+					<label for='tratamentoPrescritoTBFarmacos_3' class='labelCheckbox'>
+					<input id='tratamentoPrescritoTBFarmacos_3' name="tratamentoPrescritoTBFarmacos" value="etambutol"      type="checkbox" /> Etambutol
+					</label>
+					<label for='tratamentoPrescritoTBFarmacos_4' class='labelCheckbox'>
+					<input id='tratamentoPrescritoTBFarmacos_4' name="tratamentoPrescritoTBFarmacos" value="etionamida"     type="checkbox" /> Etionamida
+					</label>
+					<label for='tratamentoPrescritoTBFarmacos_5' class='labelCheckbox'>
+					<input id='tratamentoPrescritoTBFarmacos_5'name="tratamentoPrescritoTBFarmacos" value="estreptomicina" type="checkbox" /> Estreptomicina
+					</label>
+					<label for='tratamentoPrescritoTBFarmacos_6' class='labelCheckbox'>
+					<input id='tratamentoPrescritoTBFarmacos_6' name="tratamentoPrescritoTBFarmacos" value="ofloxacina"     type="checkbox" /> Ofloxacina
+					</label>
+					<label for='tratamentoPrescritoTBFarmacos_7' class='labelCheckbox'>
+						<input id='tratamentoPrescritoTBFarmacos_7'name="tratamentoPrescritoTBFarmacos" value="outros" type="checkbox" /> Outros:
+					</label>
+					<input name="farmacosOutros" type="text" size='50' disabled/>
+				</fieldset>
+			</div>
+			<div id='divObito' class='primary'>
+				<label for='obito'>Houve óbito:</label>
+				<select name='obito' id='obito' class='selectOne'>
+					<option value=''        > ------      </option>
+					<option value='sim'     > Sim         </option>
+					<option value='nao'     > N&atilde;o  </option>
+					<option value='ignorado'> Ignorado    </option>
+				</select>
+			</div>
+			<div id='divCasoObito' class='secondary'>
+				<label for='casoObito'> Causa: </label>
+				<select name='casoObito' id='casoObito' class='selectOne'>
+					<option value=''        > ------        </option>
+					<option value='sim'     > TB            </option>
+					<option value='nao'     > N&atilde;o TB </option>
+					<option value='ignorado'> Ignorado      </option>
+				</select>
+			</div>
+			<div id='divDataObito' class='secondary'>
+				<label for='data_obito'> Data do  óbito:</label>
+				<input  name="data_obito" id="data_obito" type="text" />
+			</div>
+			<div id='divReacoesAdversasTuberculostaticos' class='secondary'>
+				<label for='reacoesAdversasTuberculostaticos'>Reaç&atilde;o adversa dos tuberculostáticos?</label>
+				<select name='reacoesAdversasTuberculostaticos' id='reacoesAdversasTuberculostaticos' class='selectOne'>
+					<option value=''        > ------      </option>
+					<option value='sim'     > Sim         </option>
+					<option value='nao'     > N&atilde;o  </option>
+					<option value='ignorado'> Ignorado    </option>
+				</select>
+			</div>
+			<div id='divReacoesAdversasTuberculostaticosMaiores' class='secondary'>
+				<fieldset>
+					<legend>Maiores</legend>
+					<label for='reacoesAdversasTuberculostaticosMaiores' class='labelCheckbox'>
+					<input name="reacoesAdversasTuberculostaticosMaiores" value="exantema"          type="checkbox" /> Exantema
+					</label>
+					<label for='reacoesAdversasTuberculostaticosMaiores' class='labelCheckbox'>
+					<input name="reacoesAdversasTuberculostaticosMaiores" value="confusao_mental" type="checkbox" /> Confusão mental
+					</label>
+					<label for='reacoesAdversasTuberculostaticosMaiores' class='labelCheckbox'>
+					<input name="reacoesAdversasTuberculostaticosMaiores" value="ictericia"  type="checkbox" /> Icterícia
+					</label>
+					<label for='reacoesAdversasTuberculostaticosMaiores' class='labelCheckbox'>
+					<input name="reacoesAdversasTuberculostaticosMaiores" value="hepatotoxicidade"  type="checkbox" /> Hepatotoxicidade
+					</label>
+					<label for='reacoesAdversasTuberculostaticosMaiores' class='labelCheckbox'>
+					<input name="reacoesAdversasTuberculostaticosMaiores" value="vertigem_nistagmo" type="checkbox" /> Vertigem/Nistágmo
+					</label>
+					<label for='reacoesAdversasTuberculostaticosMaiores' class='labelCheckbox'>
+					<input name="reacoesAdversasTuberculostaticosMaiores" value="hipoacusia" type="checkbox" /> Hipoacusia
+					</label>
+					<label for='reacoesAdversasTuberculostaticosMaiores' class='labelCheckbox'>
+					<input name="reacoesAdversasTuberculostaticosMaiores" value="crise_convulsiva" type="checkbox" /> Crise convulsiva
+					</label>
+					<label for='reacoesAdversasTuberculostaticosMaiores' class='labelCheckbox'>
+					<input name="reacoesAdversasTuberculostaticosMaiores" value="encefalopatia" type="checkbox" /> Encefalopatia
+					</label>
+					<label for='reacoesAdversasTuberculostaticosMaiores' class='labelCheckbox'>
+					<input name="reacoesAdversasTuberculostaticosMaiores" value="psicose" type="checkbox" /> Psicose
+					</label>
+					<label for='reacoesAdversasTuberculostaticosMaiores' class='labelCheckbox'>
+					<input name="reacoesAdversasTuberculostaticosMaiores" value="neurite_optica" type="checkbox" /> Neurite óptica
+					</label>
+					<label for='reacoesAdversasTuberculostaticosMaiores' class='labelCheckbox'>
+					<input name="reacoesAdversasTuberculostaticosMaiores" value="plaqueto_leuco_eosi" type="checkbox" /> Plaquetopenia/Leucopenia/Eosinofilia
+					</label>
+					<label for='reacoesAdversasTuberculostaticosMaiores' class='labelCheckbox'>
+					<input name="reacoesAdversasTuberculostaticosMaiores" value="anemia" type="checkbox" /> Anemia hemol./Vasculite
+					</label>
+					<label for='reacoesAdversasTuberculostaticosMaiores' class='labelCheckbox'>
+					<input name="reacoesAdversasTuberculostaticosMaiores" value="choque_purpura" type="checkbox" /> Choque/Púrpura
+					</label>
+					<label for='reacoesAdversasTuberculostaticosMaiores' class='labelCheckbox'>
+					<input name="reacoesAdversasTuberculostaticosMaiores" value="nefrite_interstcial" type="checkbox" /> Nefrite intersticial
+					</label>
+					<label for='reacoesAdversasTuberculostaticosMaiores' class='labelCheckbox'>
+					<input name="reacoesAdversasTuberculostaticosMaiores" value="rabdomiolise" type="checkbox" /> Rabdomiólise/Insuf. Renal
+					</label>
+				</fieldset>
+			</div>
+			<div id='divReacoesAdversasTuberculostaticosMenores' class='secondary'>
+				<fieldset>
+					<legend>Menores</legend>
+					<label for='reacoesAdversasTuberculostaticosMenores' class='labelCheckbox'>
+					<input name="reacoesAdversasTuberculostaticosMenores" value="prurido"  type="checkbox" />Prurido
+					</label>
+					<label for='reacoesAdversasTuberculostaticosMenores' class='labelCheckbox'>
+					<input name="reacoesAdversasTuberculostaticosMenores" value="anorexia" type="checkbox" />Anorexia
+					</label>
+					<label for='reacoesAdversasTuberculostaticosMenores' class='labelCheckbox'>
+					<input name="reacoesAdversasTuberculostaticosMenores" value="nauseas_vomito" type="checkbox" />Náuseas/Vomitos
+					</label>
+					<label for='reacoesAdversasTuberculostaticosMenores' class='labelCheckbox'>
+					<input name="reacoesAdversasTuberculostaticosMenores" value="dor_abdomen"   type="checkbox" />Dor abdominal
+					</label>
+					<label for='reacoesAdversasTuberculostaticosMenores' class='labelCheckbox'>
+					<input name="reacoesAdversasTuberculostaticosMenores" value="dor_articular"  type="checkbox" />Dor articular
+					</label>
+					<label for='reacoesAdversasTuberculostaticosMenores' class='labelCheckbox'>
+					<input name="reacoesAdversasTuberculostaticosMenores" value="neurite" type="checkbox" />Neurite periférica
+					</label>
+					<label for='reacoesAdversasTuberculostaticosMenores' class='labelCheckbox'>
+					<input name="reacoesAdversasTuberculostaticosMenores" value="euforia" type="checkbox" />Euforia
+					</label>
+					<label for='reacoesAdversasTuberculostaticosMenores' class='labelCheckbox'>
+					<input name="reacoesAdversasTuberculostaticosMenores" value="insonia_sonolencia" type="checkbox" />Insônia/Sonolência
+					</label>
+					<label for='reacoesAdversasTuberculostaticosMenores' class='labelCheckbox'>
+					<input name="reacoesAdversasTuberculostaticosMenores" value="ansiedade" type="checkbox" />Ansiedade
+					</label>
+					<label for='reacoesAdversasTuberculostaticosMenores' class='labelCheckbox'>
+					<input name="reacoesAdversasTuberculostaticosMenores" value="cefaleia" type="checkbox" />Cefaléia</td>
+					</label>
+					<label for='reacoesAdversasTuberculostaticosMenores' class='labelCheckbox'>
+					<input name="reacoesAdversasTuberculostaticosMenores" value="acne" type="checkbox" />Acne
+					</label>
+					<label for='reacoesAdversasTuberculostaticosMenores' class='labelCheckbox'>
+					<input name="reacoesAdversasTuberculostaticosMenores" value="hiperuricemia" type="checkbox" />Hiperuricemia
+					</label>
+					<label for='reacoesAdversasTuberculostaticosMenores' class='labelCheckbox'>
+					<input name="reacoesAdversasTuberculostaticosMenores" value="febre" type="checkbox" />Febre
+					</label>
+					<label for='reacoesAdversasTuberculostaticosMenores' class='labelCheckbox'>
+					<input name="reacoesAdversasTuberculostaticosMenores" value="hipotensao" type="checkbox" />Hipotensão ortostática
+					</label>
+					<label for='reacoesAdversasTuberculostaticosMenores' class='labelCheckbox'>
+					<input name="reacoesAdversasTuberculostaticosMenores" value="ginecomastia" type="checkbox" />Ginecomastia
+					</label>
+				</fieldset>
+			</div>
+			<div id='divMudancaEsquemaTratamentoTB' class='secondary'>
+				<label for='mudancaEsquemaTratamentoTB'> Mudança de esquema de tratamento para TB?: </label>
+				<select name='mudancaEsquemaTratamentoTB' id='mudancaEsquemaTratamentoTB' class='selectOne'>
+					<option value=''        > ------     </option>
+					<option value='sim'     > Sim        </option>
+					<option value='nao'     > N&atilde;o </option>
+					<option value='ignorado'> Ignorado   </option>
+					<option value='nsa'     > NSA        </option>
+				</select>
+			</div>
+			<div id='divDataMudanca' class='secondary'>
+				<label for='data_mudanca'> Data da mudança:</label>
+				<input name="data_mudanca" id="data_mudanca" type="text" />
+			</div>
+			<div id='divMudanca' class='secondary'>
+				<label for='mudanca' class='labelCheckbox'>
+				<input name="mudanca" id="mudanca" value="ignorada"type="checkbox" /> Ignorada
+				</label>
+			</div>
+			<div id='divMudancaFarmacos' class='secondary'>
+				<fieldset>
+					<legend>Fármacos utilizados</legend>
+				<label for='mudancaFarmacos' class='labelCheckbox'>
+				<input name="mudancaFarmacos" value="rifampicina"   type="checkbox" /> Rifampicina
+				</label>
+				<label for='mudancaFarmacos' class='labelCheckbox'>
+				<input name="mudancaFarmacos" value="isoniazida"    type="checkbox" /> Isoniazida
+				</label>
+				<label for='mudancaFarmacos' class='labelCheckbox'>
+				<input name="mudancaFarmacos" value="pirazinamida"  type="checkbox" /> Pirazinamida
+				</label>
+				<label for='mudancaFarmacos' class='labelCheckbox'>
+				<input name="mudancaFarmacos" value="etambutol"     type="checkbox" /> Etambutol
+				</label>
+				<label for='mudancaFarmacos' class='labelCheckbox'>
+				<input name="mudancaFarmacos" value="etionamida"    type="checkbox" /> Etionamida
+				</label>
+				<label for='mudancaFarmacos' class='labelCheckbox'>
+				<input name="mudancaFarmacos" value="estreptomicina"type="checkbox" /> Estreptomicina
+				</label>
+				<label for='mudancaFarmacos' class='labelCheckbox'>
+				<input name="mudancaFarmacos" value="ofloxacina"    type="checkbox" /> Ofloxacina
+				</label>
+				<label for='mudancaFarmacos' class='labelCheckbox'>
+				<input name="mudancaFarmacos" id='mudancaFarmacos_outros' value="outros" type="checkbox" /> Outro:
+				</label>
+				<input name="farmacos14" maxlength="100"type="text" disabled />
+			</div>
+			<div id='divMudancaMotivo' class='secondary'>
+				<fieldset>
+					<legend> Motivo </legend>
+					<label for='mudancaMotivo' class='labelRadio'>
+						<input name="mudancaMotivo" value="reacao_adversa" type="radio" /> Reação adversa
+					</label>
+					<label for='mudancaMotivo' class='labelRadio'>
+						<input name="mudancaMotivo" value="interacao_medicamentosa" type="radio" /> Interação medicamentosa
+					</label>
+					<label for='mudancaMotivo' class='labelRadio'>
+						<input name="mudancaMotivo" value="falencia" type="radio" /> Falência
+					</label>
+					<label for='mudancaMotivo' class='labelRadio'>
+						<input name="mudancaMotivo" value="outro" type="radio" /> Outro:
+					</label>
+					<input name="outro_motivo" maxlength="100" type="text" disabled />
+				</fieldset>
+			</div>
+			<div id='divSuspensaoTratamentoTB' class='secondary'>
+				<label for='suspensaoTratamentoTB'> Suspens&atilde;o do tratamento para TB?: </label>
+				<select name='suspensaoTratamentoTB' id='suspensaoTratamentoTB' class='selectOne'>
+					<option value=''        > ------     </option>
+					<option value='sim'     > Sim        </option>
+					<option value='nao'     > N&atilde;o </option>
+					<option value='ignorado'> Ignorado   </option>
+					<option value='nsa'     > NSA        </option>
+				</select>
+			</div>
+			<div id='divSuspensaoDiasTratamentoTB' class='secondary'>
+				<label for='suspensaoDiasTratamento'>Quantos dias? </label>
+				<input name="suspensaoDiasTratamento" class='number' maxlength="3" size="5" type="text" /> dias
+			</div>
+
+		</fieldset>
+		<fieldset>
+			<legend>Avaliaç&atilde;o Clínica</legend>
+			<div id='divAvaliacaoGeral' class='primary'>
+				<label for='avaliacaoGeral'>Avaliação Clínica:</label>
+				<select name='avaliacaoGeral' id='avaliacaoGeral' class='selectOne'>
+					<option value=''          > ------      </option>
+					<option value='melhor'    > Melhor      </option>
+					<option value='pior'      > Pior        </option>
+					<option value='inalterado'> Inalterado  </option>
+				</select>
+			</div>
+			<div id='divTosseDiminuida' class='primary'>
+				<label for='tosseDiminuida'>Tosse diminuída:</label>
+				<select name='tosseDiminuida' id='tosseDiminuida' class='selectOne'>
+					<option value=''        > ------      </option>
+					<option value='sim'     > Sim         </option>
+					<option value='nao'     > N&atilde;o  </option>
+					<option value='ignorado'> Ignorado    </option>
+					<option value='NSA'     > NSA         </option>
+				</select>
+			</div>
+			<div id='divPesoAtual90dias' class='primary'>
+				<label for='pesoAtual90dias'>Peso atual:</label>
+				<input name="pesoAtual90dias" class='number' maxlength="5" size="5" type="text" /> Kg
+			</div>
+			<div id='divFebre90dias' class='primary'>
+				<label for='febre90dias'>Febre:</label>
+				<select name='febre90dias' id='febre90dias' class='selectOne'>
+					<option value=''        > ------      </option>
+					<option value='sim'     > Sim         </option>
+					<option value='nao'     > N&atilde;o  </option>
+					<option value='ignorado'> Ignorado    </option>
+				</select>
+			</div>
+			<div id='divExpectoracao90dias' class='primary'>
+				<label for='expectoracao90dias'>Expectoração:</label>
+				<select name='expectoracao90dias' id='expectoracao90dias' class='selectOne'>
+					<option value=''        > ------      </option>
+					<option value='sim'     > Sim         </option>
+					<option value='nao'     > N&atilde;o  </option>
+					<option value='ignorado'> Ignorado    </option>
+				</select>
+			</div>
+			<div id='divOutrosSintomas' class='primary'>
+				<label for='outrosSintomas'>Outros Sintomas:</label>
+				<input name="outrosSintomas" type="text" />
+			</div>
+			<div id='divAlteracoesEvolutivasNoExameFisico' class='primary'>
+				<label for='alteracoesEvolutivasNoExameFisico'>Alterações evolutivas no exame físico:</label>
+				<input name="alteracoesEvolutivasNoExameFisico" type="text" />
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>RX de Toráx (entre 60 e 90 dias no estudo)</legend>
+			<div id='divProbabilidadeTBAtivaAposEstudoRX' class='primary'>
+				<label for='probabilidadeTBAtivaAposEstudoRX'>Probabilidade de TB ativa ao avaliar o RXT:</label>
+				<select name='probabilidadeTBAtivaAposEstudoRX' id='probabilidadeTBAtivaAposEstudoRX' class='selectOne'>
+					<option value=''      > ------ </option>
+					<option value='alta'  > Alta   </option>
+					<option value='media' > Média  </option>
+					<option value='baixa' > Baixa  </option>
+				</select>
+			</div>
+			<div id='divCativacao90dias' class='secondary'>
+				<label for='cativacao90dias'> Cativaç&atilde;o:</label>
+				<select name='cativacao90dias' id='cativacao90dias' class='selectOne'>
+					<option value=''        > ------      </option>
+					<option value='sim'     > Sim         </option>
+					<option value='nao'     > N&atilde;o  </option>
+					<option value='ignorado'> Ignorado    </option>
+				</select>
+			</div>
+			<div id='divPadraoTipico90dias' class='secondary'>
+				<label for='padraoTipico90dias'> Padrão típico:</label>
+				<select name='padraoTipico90dias' id='padraoTipico90dias' class='selectOne'>
+					<option value=''        > ------      </option>
+					<option value='sim'     > Sim         </option>
+					<option value='nao'     > N&atilde;o  </option>
+					<option value='ignorado'> Ignorado    </option>
+				</select>
+				<small>Infiltrado em lobo(s) superior(es) e/ou segmento apical de lobo inferior</small>
+			</div>
+			<div id='divCompativel90dias' class='secondary'>
+				<label for='compativel90dias'> Compatível:</label>
+				<select name='compativel90dias' id='compativel90dias' class='selectOne'>
+					<option value=''        > ------      </option>
+					<option value='sim'     > Sim         </option>
+					<option value='nao'     > N&atilde;o  </option>
+					<option value='ignorado'> Ignorado    </option>
+				</select>
+				<small> Alargamento mediastinal ou linf. hilar, padrão miliar, ou derrame pleural</small>
+			</div>
+			<div id='divAtipico90dias' class='secondary'>
+				<label for='atipico90dias'> Atípico:</label>
+				<select name='atipico90dias' id='atipico90dias' class='selectOne'>
+					<option value=''        > ------      </option>
+					<option value='sim'     > Sim         </option>
+					<option value='nao'     > N&atilde;o  </option>
+					<option value='ignorado'> Ignorado    </option>
+				</select>
+				<small>Qualquer outro padr&atilde;o</small>
+			</div>
+			<div id='divcasoBaixaProbabilidade90dias' class='secondary'>
+				<label for='casoBaixaProbabilidade90dias' > &nbsp;</label>
+				<select name='casoBaixaProbabilidade90dias' id='casoBaixaProbabilidade90dias' class='selectOne'>
+					<option value=''        > ------      </option>
+					<option value='inativa_sequela'> TB inativa sequela </option>
+					<option value='outra'          > Outra doença       </option>
+					<option value='normal'         > Normal             </option>
+					<option value='ignorado'       > Ignorado           </option>
+					<option value='nsa'            > NSA                </option>
+				</select>
+			</div>
+			<div id='divDataRX' class='primary'>
+				<label for='data_rx'> Data do RX:</label>
+				<input name="data_rx" id="data_rx" type="text" />
+			</div>
+			<div id='divFollowUpRXTorax' class='primary'>
+				<label for='followUpRXTorax'> Follow up do RX de Tórax: </label>
+				<select name='followUpRXTorax' id='followUpRXTorax' class='selectOne'>
+					<option value=''        > ------      </option>
+					<option value="melhora"    />Melhora    </option>
+					<option value="inalterado" />Inalterado </option>
+					<option value="piorado"    />Piorado    </option>
+					<option value="ignorado"   />Ignorado   </option>
+				</select>
+				<small>Compare com o RXT inicial com o atual</small>
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend> Diagnóstico </legend>
+			<div id='divDiagnostico90dias' class='primary'>
+				<label for='diagnostico90dias'> Diagnóstico 90 dias: </label>
+				<select name='diagnostico90dias' id='diagnostico90dias' class='selectOne'>
+					<option value="melhora"    type="radio" />TB pulmonar       </option>
+					<option value="inalterado" type="radio" />TB Extra-pulmonar </option>
+					<option value="piorado"    type="radio" />Pulmonar+Extra    </option>
+					<option value="nao_tb"     type="radio" />N&atilde;o TB   </option>
+					<option value="ignorado"   type="radio" />Ignorado   </option>
+				</select>
+			</div>
+			<div id='divDiagnosticoDiferenteTB' class='secondary'>
+				<fieldset>
+					<legend> Em caso de outro Diagnóstico diferente de TB </legend>
+					<label for='diagnosticoDiferenteTB' class='labelRadio'>
+						<input name="diagnosticoDiferenteTB" value="asma"      type="checkbox" /> Asma
+					</label>
+					<label for='diagnosticoDiferenteTB' class='labelRadio'>
+						<input name="diagnosticoDiferenteTB" value="rinossinusite"      type="checkbox" /> Rinossinusite
+					</label>
+					<label for='diagnosticoDiferenteTB' class='labelRadio'>
+						<input name="diagnosticoDiferenteTB" value="dpco_infeccao"     type="checkbox"> DPOC + Infecção brônquica inespecífica
+					</label>
+					<label for='diagnosticoDiferenteTB' class='labelRadio'>
+						<input name="diagnosticoDiferenteTB" value="pneumo_bacteria"   type="checkbox" /> Pneumonia
+					</label>
+					<label for='diagnosticoDiferenteTB' class='labelRadio'>
+						<input name="diagnosticoDiferenteTB" value="sequela_infeccao"  type="checkbox"> Infeção brônquica inespecífica
+					</label>
+					<label for='diagnosticoDiferenteTB' class='labelRadio'>
+						<input name="diagnosticoDiferenteTB" value="micose_pulmonar"   type="checkbox" /> Micose pulmonar
+					</label>
+					<label for='diagnosticoDiferenteTB' class='labelRadio'>
+						<input name="diagnosticoDiferenteTB" value="pneumoconiose"     type="checkbox"> Pneumoconiose
+					</label>
+					<label for='diagnosticoDiferenteTB' class='labelRadio'>
+						<input name="diagnosticoDiferenteTB" value="ca_de_pulmao"      type="checkbox" /> CA de pulmão
+					</label>
+					</label>
+					<label for='diagnosticoDiferenteTB' class='labelRadio'>
+						<input name="diagnosticoDiferenteTB" value="falencia_cardiaca" type="checkbox" /> Falência cardíaca
+					</label>
+					<label for='diagnosticoDiferenteTB' class='labelRadio'>
+						<input name="diagnosticoDiferenteTB"  id='diagnosticoDifOutros' value="outros" type="checkbox" /> Outro:
+					</label>
+					<input name="outro_diagnostico_sim" maxlength="100" type="text" disabled />
+					</td>
+				</label>
+				</fieldset>
+			</div>
+			<div id='divObservacoes' class='primary'>
+				<label for='observacoes' class='labelTextarea'> Observações</label>
+				<textarea name="observacoes" rows="5"></textarea>
+			</div>
+		</fieldset>
+		<fieldset>
+			<div class='reset'><input value="Limpar Formulário" class='inputButton'  type="reset"></div>
+			<div class='submit'><input value="Enviar Formulário" class='inputButton'  type="submit"></div>
+		</fieldset>
+	</form></div><!-- /maincontent-->
+</div><!-- content-->
+</div><!-- /mainFrame-->
+
+</body>
+</html>
