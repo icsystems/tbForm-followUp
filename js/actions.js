@@ -30,24 +30,40 @@ $(document).ready(function(){
 	var hlcolor = '#FFF8C6';
 	$('#data_inicio').datepicker({
 		dateFormat: 'dd/mm/yy',
-		monthNames: ['Janeiro','Fevereiro','Mar&ccedil;o','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+		maxDate: '+0d',
+		changeMonth: true,
+		changeYear: true,
+		maxDate : '+0y',
+		minDate : '-130y',
+		yearRange : '-130:+130',
 		dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
 	});
-	$('#data_rx').datepicker({
-		dateFormat: 'dd/mm/yy',
-		monthNames: ['Janeiro','Fevereiro','Mar&ccedil;o','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-		dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
-	});
+
 	$('#data_obito').datepicker({
 		dateFormat: 'dd/mm/yy',
-		monthNames: ['Janeiro','Fevereiro','Mar&ccedil;o','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+		maxDate: '+0d',
+		changeMonth: true,
+		changeYear: true,
+		maxDate : '+0y',
+		minDate : '-130y',
+		yearRange : '-130:+130',
 		dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
 	});
+
 	$('#data_mudanca').datepicker({
 		dateFormat: 'dd/mm/yy',
-		monthNames: ['Janeiro','Fevereiro','Mar&ccedil;','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+		maxDate: '+0d',
+		changeMonth: true,
+		changeYear: true,
+		maxDate : '+0y',
+		minDate : '-130y',
+		yearRange : '-130:+130',
 		dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
 	});
+
 	//Toggle options
 	//Foi prescrito TB?
 	$('#tratamentoPrescritoTB').change(function(){
@@ -376,76 +392,6 @@ $(document).ready(function(){
 		}
 	});
 	//Probabilidade de TBativa
-	$('#probabilidadeTBAtivaAposEstudoRX').change(function(){
-		var alta = new Array();
-		alta[0] = '#divCativacao90dias';
-		alta[1] = '#divPadraoTipico90dias';
-		alta[2] = '#divCompativel90dias';
-		alta[3] = '#divAtipico90dias';
-		alta[4] = '#rxNDA';
-		var baixa = new Array();
-		baixa[0] = '#divcasoBaixaProbabilidade90dias';
-		// Se alta ou media, disponibilizar colunas listadas a cima
-		if($(this).val()=='alta' || $(this).val() == 'media'){
-			for(div in alta){
-				var elems = $('*', alta[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).addClass('required');
-				});
-				if($(alta[div]).css('display') != 'block')
-					$(alta[div]).toggle(function() {
-						$(this).css('background-color', hlcolor);
-						$(this).animate({backgroundColor : "white"}, 4000);
-					});
-			}
-			for(div in baixa){
-				var elems = $('*', baixa[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).removeClass('required');
-				});
-				if($(baixa[div]).css('display') != 'none')
-					$(baixa[div]).toggle();
-			}
-		}
-		// Se baixa, ocultar colunas listadas a cima
-		if($(this).val()=='baixa'){
-			for(div in alta){
-				var elems = $('*', alta[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).removeClass('required');
-				});
-				if($(alta[div]).css('display') != 'none')
-					$(alta[div]).toggle();
-			}
-			for(div in baixa){
-				var elems = $('*', baixa[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).addClass('required');
-				});
-				if($(baixa[div]).css('display') != 'block')
-					$(baixa[div]).toggle(function() {
-						$(this).css('background-color', hlcolor);
-						$(this).animate({backgroundColor : "white"}, 4000);
-					});
-			}
-		}
-	});
 	//O diagnostico eh tb???
 	$('#diagnostico90dias').change(function(){
 		var dep = new Array();
