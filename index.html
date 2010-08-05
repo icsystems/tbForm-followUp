@@ -32,7 +32,15 @@
 <div id='content'>
 	<div id='maincontent'><form id='form_followup' action='cgi-bin/submitForm.py' method='POST'>
 		<fieldset id='followup'>
-			<legend>Follow Up</legend>
+			<legend>Seguimento Clínico</legend>
+			<div id='divFormulario' class='primary'>
+				<label for='formulario'>Formulário:</label>
+				<select name='formulario' id='formulario' class='selectOne'>
+					<option value=''					> ------ 							</option>
+					<option value='seguimentoClinico60'	> Seguimento Clínico 60 a 90 dias	</option>
+					<option value='seguimentoClinico150'> Seguimento Clínico 150 a 180 dias	</option>
+				</select>
+			</div>
 			<div id='divTratamentoPrescritoTB' class='primary'>
 				<label for='tratamentoPrescritoTB'>Tratamento prescrito para TB:</label>
 				<select name='tratamentoPrescritoTB' id='tratamentoPrescritoTB' class='selectOne'>
@@ -70,7 +78,25 @@
 					<input id='tratamentoPrescritoTBFarmacos_6' name="tratamentoPrescritoTBFarmacos" value="ofloxacina"     type="checkbox" /> Ofloxacina
 					</label>
 					<label for='tratamentoPrescritoTBFarmacos_7' class='labelCheckbox'>
-						<input id='tratamentoPrescritoTBFarmacos_7'name="tratamentoPrescritoTBFarmacos" value="outros" type="checkbox" /> Outros:
+					<input id='tratamentoPrescritoTBFarmacos_7' name="tratamentoPrescritoTBFarmacos" value="moxifloxacina"     type="checkbox" /> Moxifloxacina
+					</label>
+					<label for='tratamentoPrescritoTBFarmacos_8' class='labelCheckbox'>
+					<input id='tratamentoPrescritoTBFarmacos_8' name="tratamentoPrescritoTBFarmacos" value="clofazimina"      type="checkbox" /> Clofazimina
+					</label>
+					<label for='tratamentoPrescritoTBFarmacos_9' class='labelCheckbox'>
+					<input id='tratamentoPrescritoTBFarmacos_9' name="tratamentoPrescritoTBFarmacos" value="levofloxacina"      type="checkbox" /> Levofloxacina
+					</label>
+					<label for='tratamentoPrescritoTBFarmacos_10' class='labelCheckbox'>
+					<input id='tratamentoPrescritoTBFarmacos_10' name="tratamentoPrescritoTBFarmacos" value="canamicina"      type="checkbox" /> Canamicina
+					</label>
+					<label for='tratamentoPrescritoTBFarmacos_11' class='labelCheckbox'>
+					<input id='tratamentoPrescritoTBFarmacos_11' name="tratamentoPrescritoTBFarmacos" value="amicacina"      type="checkbox" /> Amicacina
+					</label>
+					<label for='tratamentoPrescritoTBFarmacos_12' class='labelCheckbox'>
+					<input id='tratamentoPrescritoTBFarmacos_12' name="tratamentoPrescritoTBFarmacos" value="terizidona"      type="checkbox" /> Terizidona
+					</label>
+					<label for='tratamentoPrescritoTBFarmacos_13' class='labelCheckbox'>
+						<input id='tratamentoPrescritoTBFarmacos_13' name="tratamentoPrescritoTBFarmacos" value="outros" type="checkbox" /> Outros:
 					</label>
 					<input name="farmacosOutros" type="text" size='50' disabled/>
 				</fieldset>
@@ -250,7 +276,25 @@
 				<input name="mudancaFarmacos" value="ofloxacina"    type="checkbox" /> Ofloxacina
 				</label>
 				<label for='mudancaFarmacos' class='labelCheckbox'>
-				<input name="mudancaFarmacos" id='mudancaFarmacos_outros' value="outros" type="checkbox" /> Outro:
+				<input name="mudancaFarmacos" value="moxifloxacina"     type="checkbox" /> Moxifloxacina
+				</label>
+				<label for='mudancaFarmacos' class='labelCheckbox'>
+				<input name="mudancaFarmacos" value="clofazimina"      type="checkbox" /> Clofazimina
+				</label>
+				<label for='mudancaFarmacos' class='labelCheckbox'>
+				<input name="mudancaFarmacos" value="levofloxacina"      type="checkbox" /> Levofloxacina
+				</label>
+				<label for='mudancaFarmacos' class='labelCheckbox'>
+				<input name="mudancaFarmacos" value="canamicina"      type="checkbox" /> Canamicina
+				</label>
+				<label for='mudancaFarmacos' class='labelCheckbox'>
+				<input name="mudancaFarmacos" value="amicacina"      type="checkbox" /> Amicacina
+				</label>
+				<label for='mudancaFarmacos' class='labelCheckbox'>
+				<input name="mudancaFarmacos" value="terizidona"      type="checkbox" /> Terizidona
+				</label>
+				<label for='mudancaFarmacos' class='labelCheckbox'>
+				<input name="mudancaFarmacos" value="outros" type="checkbox" /> Outro:
 				</label>
 				<input name="farmacos14" maxlength="100"type="text" disabled />
 			</div>
@@ -273,7 +317,7 @@
 				</fieldset>
 			</div>
 			<div id='divSuspensaoTratamentoTB' class='secondary'>
-				<label for='suspensaoTratamentoTB'> Suspens&atilde;o do tratamento para TB?: </label>
+				<label for='suspensaoTratamentoTB'> Suspens&atilde;o do tratamento para TB? </label>
 				<select name='suspensaoTratamentoTB' id='suspensaoTratamentoTB' class='selectOne'>
 					<option value=''        > ------     </option>
 					<option value='sim'     > Sim        </option>
@@ -286,7 +330,23 @@
 				<label for='suspensaoDiasTratamento'>Quantos dias? </label>
 				<input name="suspensaoDiasTratamento" class='number' maxlength="3" size="5" type="text" /> dias
 			</div>
-
+			<div id='divInternacaoHospitalar' class='secondary'>
+				<label for='internacaoHospitalar'>Internação hospitalar?</label>
+				<select name='internacaoHospitalar' id='internacaoHospitalar' class='selectOne'>
+					<option value=''		> -----		</option>
+					<option value='sim'		> Sim		</option>
+					<option value='nao'		> Não		</option>
+					<option value='ignorado'> Ignorado	</option>
+				</select>
+			</div>
+			<div id='divDataInternacao' class='secondary'>
+				<label for='data_internacao'> Data da internação:</label>
+				<input  name="data_internacao" id="data_internacao" type="text" />
+			</div>
+			<div id='divDataAlta' class='secondary'>
+				<label for='data_alta'> Data da alta:</label>
+				<input  name="data_alta" id="data_alta" type="text" />
+			</div>
 		</fieldset>
 		<fieldset>
 			<legend>Avaliaç&atilde;o Clínica</legend>
@@ -311,15 +371,16 @@
 			</div>
 			<div id='divPesoAtual90dias' class='primary'>
 				<label for='pesoAtual90dias'>Peso atual:</label>
-				<input name="pesoAtual90dias" class='number' maxlength="5" size="5" type="text" /> Kg
+				<input name="pesoAtual90dias" class='number' maxlength="3" size="5" type="text" /> Kg
 			</div>
 			<div id='divFebre90dias' class='primary'>
 				<label for='febre90dias'>Febre:</label>
 				<select name='febre90dias' id='febre90dias' class='selectOne'>
-					<option value=''        > ------      </option>
-					<option value='sim'     > Sim         </option>
-					<option value='nao'     > N&atilde;o  </option>
-					<option value='ignorado'> Ignorado    </option>
+					<option value=''        	> ------      	</option>
+					<option value='sim'     	> Sim         	</option>
+					<option value='nao'     	> N&atilde;o  	</option>
+					<option value='manteveFebre'> Manteve febre	</option>
+					<option value='ignorado'	> Ignorado    	</option>
 				</select>
 			</div>
 			<div id='divExpectoracao90dias' class='primary'>
@@ -337,11 +398,20 @@
 			</div>
 			<div id='divAlteracoesEvolutivasNoExameFisico' class='primary'>
 				<label for='alteracoesEvolutivasNoExameFisico'>Alterações evolutivas no exame físico:</label>
-				<input name="alteracoesEvolutivasNoExameFisico" type="text" />
+				<select name='alteracoesEvolutivasNoExameFisico' id='alteracoesEvolutivasNoExameFisico' class='selectOne'>
+					<option value=''			> -----			</option>
+					<option value='melhora'		> Melhora		</option>
+					<option value='piora'		> Piora			</option>
+					<option value='inalterada'	> Inalterada	</option>
+				</select>
 			</div>
 		</fieldset>
 		<fieldset>
-		<legend>RX de Toráx (entre 60 e 90 dias no estudo)</legend>
+			<legend id='tituloRXTorax'>RX do Tórax</legend>
+			<div id='divDataRX' class='primary'>
+				<label for='data_rx'> Data do RX:</label>
+				<input  name="data_rx" id="data_rx" type="text" />
+			</div>
 			<div id='divAvaliacaoPos90dias' class='primary required'>
 			<label> Avaliação: </label>
 			<select name='avaliacaoPos90dias' class='selectOne required'>
@@ -356,8 +426,8 @@
 		<fieldset>
 			<legend> Diagnóstico </legend>
 			<div id='divDiagnostico90dias' class='primary'>
-				<label for='diagnostico90dias'> Diagnóstico 90 dias: </label>
-				<select name='diagnostico90dias' id='diagnostico90dias' class='selectOne'>
+				<label for='diagnostico'> Diagnóstico: </label>
+				<select name='diagnostico' id='diagnostico' class='selectOne'>
 					<option value="melhora"    type="radio" />TB pulmonar       </option>
 					<option value="inalterado" type="radio" />TB Extra-pulmonar </option>
 					<option value="piorado"    type="radio" />Pulmonar+Extra    </option>

@@ -64,7 +64,51 @@ $(document).ready(function(){
 		dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
 	});
 
+	$('#data_internacao').datepicker({
+		dateFormat: 'dd/mm/yy',
+		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+		maxDate: '+0d',
+		changeMonth: true,
+		changeYear: true,
+		maxDate : '+0y',
+		minDate : '-130y',
+		yearRange : '-130:+130',
+		dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
+	});
+
+	$('#data_alta').datepicker({
+		dateFormat: 'dd/mm/yy',
+		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+		maxDate: '+0d',
+		changeMonth: true,
+		changeYear: true,
+		maxDate : '+0y',
+		minDate : '-130y',
+		yearRange : '-130:+130',
+		dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
+	});
+
+	$('#data_rx').datepicker({
+		dateFormat: 'dd/mm/yy',
+		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+		maxDate: '+0d',
+		changeMonth: true,
+		changeYear: true,
+		maxDate : '+0y',
+		minDate : '-130y',
+		yearRange : '-130:+130',
+		dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
+	});
 	//Toggle options
+
+	//Definindo o formulario
+	$('#formulario').change(function(){
+		if($('#formulario').val() == 'seguimentoClinico60')
+			$('#tituloRXTorax').html('RX de Tórax (60 a 90 dias)');
+		else if($('#formulario').val() == 'seguimentoClinico150')
+			$('#tituloRXTorax').html('RX de Tórax (150 a 180 dias)');
+	});
+
 	//Foi prescrito TB?
 	$('#tratamentoPrescritoTB').change(function(){
 		var dep = new Array();
@@ -72,7 +116,8 @@ $(document).ready(function(){
 		dep[1] = '#divTratamentoPrescritoTBFarmaco';
 		dep[2] = '#divReacoesAdversasTuberculostaticos';
 		dep[3] = '#divMudancaEsquemaTratamentoTB';
-		dep[4] = '#divTosseDiminuida';
+		dep[4] = '#divInternacaoHospitalar';
+		dep[5] = '#divTosseDiminuida';
 		// Se sim, disponibilizar colunas listadas a cima
 		if($(this).val()=='sim'){
 			for(div in dep){
@@ -93,14 +138,14 @@ $(document).ready(function(){
 		}
 		// Se nao, ocultar colunas listadas a cima
 		if($(this).val()=='nao'){
-			dep[6] = '#divReacoesAdversasTuberculostaticosMaiores';
-			dep[7] = '#divReacoesAdversasTuberculostaticosMenores';
-			dep[8] = '#divDataMudanca';
-			dep[9] = '#divMudanca';
-			dep[10] = '#divMudancaFarmacos';
-			dep[11] = '#divMudancaMotivo';
-			dep[12] = '#divSuspensaoTratamentoTB';
-			dep[5] = '#divSuspensaoDiasTratamentoTB';
+			dep[7] = '#divReacoesAdversasTuberculostaticosMaiores';
+			dep[8] = '#divReacoesAdversasTuberculostaticosMenores';
+			dep[9] = '#divDataMudanca';
+			dep[10] = '#divMudanca';
+			dep[11] = '#divMudancaFarmacos';
+			dep[12] = '#divMudancaMotivo';
+			dep[13] = '#divSuspensaoTratamentoTB';
+			dep[6] = '#divSuspensaoDiasTratamentoTB';
 			for(div in dep){
 				var elems = $('*', dep[div]);
 				$(elems).each(function(){
@@ -323,6 +368,47 @@ $(document).ready(function(){
 		});
 
 	});
+
+	//Internacao Hospitalar?
+	$('#internacaoHospitalar').change(function(){
+		var dep = new Array();
+		dep[0] = '#divDataInternacao';
+		dep[1] = '#divDataAlta';
+		// Se sim, disponibilizar colunas listadas a cima
+		if($(this).val()=='sim'){
+			for(div in dep){
+				var elems = $('*', dep[div]);
+				$(elems).each(function(){
+					var element = $(this);
+					if (   element[0].nodeName != 'FIELDSET'
+					    && element[0].nodeName != 'SMALL'
+					    && element[0].nodeName != 'OPTION')
+						$(this).addClass('required');
+				});
+				if($(dep[div]).css('display') != 'block')
+					$(dep[div]).toggle(function() {
+						$(this).css('background-color', hlcolor);
+						$(this).animate({backgroundColor : "white"}, 4000);
+					});
+			}
+		}
+		// Se nao, ocultar colunas listadas a cima
+		if($(this).val()=='nao' || $(this).val()=='ignorado'){
+			for(div in dep){
+				var elems = $('*', dep[div]);
+				$(elems).each(function(){
+					var element = $(this);
+					if (   element[0].nodeName != 'FIELDSET'
+					    && element[0].nodeName != 'SMALL'
+					    && element[0].nodeName != 'OPTION')
+						$(this).removeClass('required');
+				});
+				if($(dep[div]).css('display') != 'none')
+					$(dep[div]).toggle();
+			}
+		}
+	});
+
 	$('#mudanca').click( function(){
 		if($('#mudanca').is(':checked')){
 			$('#data_mudanca').attr('disabled', true);
@@ -393,7 +479,7 @@ $(document).ready(function(){
 	});
 	//Probabilidade de TBativa
 	//O diagnostico eh tb???
-	$('#diagnostico90dias').change(function(){
+	$('#diagnostico').change(function(){
 		var dep = new Array();
 		dep[0] = '#divDiagnosticoDiferenteTB';
 		// Se naun, disponibilizar colunas listadas a cima
