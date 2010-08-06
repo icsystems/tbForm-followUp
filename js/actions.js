@@ -107,6 +107,8 @@ $(document).ready(function(){
 			$('#tituloRXTorax').html('RX de Tórax (60 a 90 dias)');
 		else if($('#formulario').val() == 'seguimentoClinico150')
 			$('#tituloRXTorax').html('RX de Tórax (150 a 180 dias)');
+		else
+			$('#tituloRXTorax').html('RX de Tórax');
 	});
 
 	//Foi prescrito TB?
