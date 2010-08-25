@@ -111,6 +111,43 @@ $(document).ready(function(){
 			$('#tituloRXTorax').html('RX de Tórax');
 	});
 
+	$('#seguimentoDuranteInternacao').change(function(){
+		var dep = new Array();
+		dep[0] = '#divUnidadeReferenciaSeguimento';
+		// Se sim, disponibilizar colunas listadas a cima
+		if($(this).val()=='nao'){
+			for(div in dep){
+				var elems = $('*', dep[div]);
+				$(elems).each(function(){
+					var element = $(this);
+					if (   element[0].nodeName != 'FIELDSET'
+					    && element[0].nodeName != 'SMALL'
+					    && element[0].nodeName != 'OPTION')
+						$(this).addClass('required');
+				});
+				if($(dep[div]).css('display') != 'block')
+					$(dep[div]).toggle(function() {
+						$(this).css('background-color', hlcolor);
+						$(this).animate({backgroundColor : "white"}, 4000);
+					});
+			}
+		}
+		// Se nao, ocultar colunas listadas a cima
+		else{
+			for(div in dep){
+				var elems = $('*', dep[div]);
+				$(elems).each(function(){
+					var element = $(this);
+					if (   element[0].nodeName != 'FIELDSET'
+					    && element[0].nodeName != 'SMALL'
+					    && element[0].nodeName != 'OPTION')
+						$(this).removeClass('required');
+				});
+				if($(dep[div]).css('display') != 'none')
+					$(dep[div]).toggle();
+			}
+		}
+	});
 	//Foi prescrito TB?
 	$('#tratamentoPrescritoTB').change(function(){
 		var dep = new Array();
@@ -162,7 +199,7 @@ $(document).ready(function(){
 			}
 		}
 	});
-	$('#tratamentoPrescritoTBFarmacos_7').click(function(){
+	$('#tratamentoPrescritoTBFarmacos_13').click(function(){
 		if($(this).is(':checked')){
 			$('').attr('checked', 'true');
 			fieldOutros = $('')
