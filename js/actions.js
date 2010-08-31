@@ -28,7 +28,7 @@ function getScrollXY() {
 //Document is ready, let's play
 $(document).ready(function(){
 	var hlcolor = '#FFF8C6';
-	$('#data_inicio').datepicker({
+	$('.data').datepicker({
 		dateFormat: 'dd/mm/yy',
 		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
 		maxDate: '+0d',
@@ -40,65 +40,21 @@ $(document).ready(function(){
 		dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
 	});
 
-	$('#data_obito').datepicker({
-		dateFormat: 'dd/mm/yy',
-		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-		maxDate: '+0d',
-		changeMonth: true,
-		changeYear: true,
-		maxDate : '+0y',
-		minDate : '-130y',
-		yearRange : '-130:+130',
-		dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
+	$('.text').keypress(function(e){
+		if((e.which > 32 && e.which < 65)||
+			(e.which > 90 && e.which < 97)||
+			(e.which > 122 && e.which < 127)||
+			(e.which > 127 && e.which < 192)){
+			return false;
+		}
 	});
 
-	$('#data_mudanca').datepicker({
-		dateFormat: 'dd/mm/yy',
-		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-		maxDate: '+0d',
-		changeMonth: true,
-		changeYear: true,
-		maxDate : '+0y',
-		minDate : '-130y',
-		yearRange : '-130:+130',
-		dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
+	$('.number').keypress(function(e){
+		if((e.which > 31 && e.which < 48)||(e.which > 57)){
+			return false;
+		}
 	});
 
-	$('#data_internacao').datepicker({
-		dateFormat: 'dd/mm/yy',
-		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-		maxDate: '+0d',
-		changeMonth: true,
-		changeYear: true,
-		maxDate : '+0y',
-		minDate : '-130y',
-		yearRange : '-130:+130',
-		dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
-	});
-
-	$('#data_alta').datepicker({
-		dateFormat: 'dd/mm/yy',
-		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-		maxDate: '+0d',
-		changeMonth: true,
-		changeYear: true,
-		maxDate : '+0y',
-		minDate : '-130y',
-		yearRange : '-130:+130',
-		dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
-	});
-
-	$('#data_rx').datepicker({
-		dateFormat: 'dd/mm/yy',
-		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-		maxDate: '+0d',
-		changeMonth: true,
-		changeYear: true,
-		maxDate : '+0y',
-		minDate : '-130y',
-		yearRange : '-130:+130',
-		dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
-	});
 	//Toggle options
 
 	//Definindo o formulario
