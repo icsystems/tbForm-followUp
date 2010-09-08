@@ -28,9 +28,11 @@ function getScrollXY() {
 //Document is ready, let's play
 $(document).ready(function(){
 	var hlcolor = '#FFF8C6';
+
 	$('.data').datepicker({
 		dateFormat: 'dd/mm/yy',
 		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+		monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Aug','Set','Out','Nov','Dez'],
 		maxDate: '+0d',
 		changeMonth: true,
 		changeYear: true,
@@ -60,9 +62,9 @@ $(document).ready(function(){
 	//Definindo o formulario
 	$('#formulario').change(function(){
 		if($('#formulario').val() == 'seguimentoClinico60')
-			$('#tituloRXTorax').html('RX de Tórax (60 a 90 dias)');
-		else if($('#formulario').val() == 'seguimentoClinico150')
-			$('#tituloRXTorax').html('RX de Tórax (150 a 180 dias)');
+			$('#tituloRXTorax').html('RX de Tórax (60 dias)');
+		else if($('#formulario').val() == 'seguimentoClinico180')
+			$('#tituloRXTorax').html('RX de Tórax (180 dias)');
 		else
 			$('#tituloRXTorax').html('RX de Tórax');
 	});
