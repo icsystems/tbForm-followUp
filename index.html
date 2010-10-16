@@ -2,7 +2,7 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<title>Follow Up- Preencha todos os campos do Formulário abaixo.</title>
-	<link rel="stylesheet" type="text/css" href="./css/form_style.css" /> 
+	<link rel="stylesheet" type="text/css" href="./css/form_style.css" />
 	<link rel="stylesheet" type="text/css" href="./css/page_style.css" />
 	<link rel="stylesheet" type="text/css" href="./css/JScrollPane.css" />
 	<link rel="stylesheet" type="text/css" href="./css/smoothness/jquery-ui.css" />
@@ -136,7 +136,7 @@
 				<input  name="data_obito" id="data_obito" type="text" class='data'/>
 			</div>
 			<div id='divReacoesAdversasTuberculostaticos' class='secondary'>
-				<label for='reacoesAdversasTuberculostaticos'>Reaç&atilde;o adversa dos tuberculostáticos?</label>
+				<label for='reacoesAdversasTuberculostaticos'>Reaç&atilde;o adversa dos medicamentos anti-TB?</label>
 				<select name='reacoesAdversasTuberculostaticos' id='reacoesAdversasTuberculostaticos' class='selectOne'>
 					<option value=''        > ------      </option>
 					<option value='sim'     > Sim         </option>
@@ -308,7 +308,7 @@
 				<label for='mudancaFarmacos' class='labelCheckbox'>
 				<input name="mudancaFarmacos" value="outros" type="checkbox" /> Outro:
 				</label>
-				<input name="farmacos14" maxlength="100"type="text" disabled />
+				<input name="farmacos14" id="farmacos14" maxlength="100"type="text" disabled />
 			</div>
 			<div id='divMudancaMotivo' class='secondary'>
 				<fieldset>
@@ -342,29 +342,12 @@
 				<label for='suspensaoDiasTratamento'>Quantos dias? </label>
 				<input name="suspensaoDiasTratamento" class='number' maxlength="3" size="5" type="text" /> dias
 			</div>
-			<div id='divInternacaoHospitalar' class='secondary'>
-				<label for='internacaoHospitalar'>Internação hospitalar?</label>
-				<select name='internacaoHospitalar' id='internacaoHospitalar' class='selectOne'>
-					<option value=''		> -----		</option>
-					<option value='sim'		> Sim		</option>
-					<option value='nao'		> Não		</option>
-					<option value='ignorado'> Ignorado	</option>
-				</select>
-			</div>
-			<div id='divDataInternacao' class='secondary'>
-				<label for='data_internacao'> Data da internação:</label>
-				<input  name="data_internacao" id="data_internacao" type="text" class='data'/>
-			</div>
-			<div id='divDataAlta' class='secondary'>
-				<label for='data_alta'> Data da alta:</label>
-				<input  name="data_alta" id="data_alta" type="text" class='data'/>
-			</div>
 		</fieldset>
 		<fieldset>
 			<legend>Avaliaç&atilde;o Clínica</legend>
 			<div id='divTosseDiminuida' class='secondary'>
-				<label for='tosseDiminuida'>Tosse diminuída:</label>
-				<select name='tosseDiminuida' id='tosseDiminuida' class='selectOne'>
+				<label for='tosseDiminuida'>Tosse:</label>
+				<select name='tosseDiminuida' id='tosseDiminuida'>
 					<option value=''        > ------      </option>
 					<option value='sim'     > Sim         </option>
 					<option value='nao'     > N&atilde;o  </option>
@@ -372,23 +355,22 @@
 					<option value='NSA'     > NSA         </option>
 				</select>
 			</div>
-			<div id='divPesoAtual90dias' class='primary'>
-				<label for='pesoAtual90dias'>Peso atual:</label>
-				<input name="pesoAtual90dias" class='number' maxlength="3" size="5" type="text" /> Kg
+			<div id='divPesoAtual' class='primary'>
+				<label for='pesoAtual'>Peso atual:</label>
+				<input name="pesoAtual" id="pesoAtual" class='number' maxlength="3" size="5" type="text" /> Kg
 			</div>
-			<div id='divFebre90dias' class='primary'>
-				<label for='febre90dias'>Febre:</label>
-				<select name='febre90dias' id='febre90dias' class='selectOne'>
+			<div id='divFebre' class='primary'>
+				<label for='febre'>Febre:</label>
+				<select name='febre' id='febre' class='selectOne'>
 					<option value=''        	> ------      	</option>
 					<option value='sim'     	> Sim         	</option>
 					<option value='nao'     	> N&atilde;o  	</option>
-					<option value='manteveFebre'> Manteve febre	</option>
 					<option value='ignorado'	> Ignorado    	</option>
 				</select>
 			</div>
-			<div id='divExpectoracao90dias' class='primary'>
-				<label for='expectoracao90dias'>Expectoração:</label>
-				<select name='expectoracao90dias' id='expectoracao90dias' class='selectOne'>
+			<div id='divExpectoracao' class='primary'>
+				<label for='expectoracao'>Expectoração:</label>
+				<select name='expectoracao' id='expectoracao' class='selectOne'>
 					<option value=''        > ------      </option>
 					<option value='sim'     > Sim         </option>
 					<option value='nao'     > N&atilde;o  </option>
@@ -397,15 +379,15 @@
 			</div>
 			<div id='divOutrosSintomas' class='primary'>
 				<label for='outrosSintomas'>Outros Sintomas:</label>
-				<input name="outrosSintomas" type="text" class='text'/>
+				<input name="outrosSintomas" id="outrosSintomas" type="text" class='text'/>
 			</div>
 			<div id='divAlteracoesEvolutivasNoExameFisico' class='primary'>
 				<label for='alteracoesEvolutivasNoExameFisico'>Alterações evolutivas no exame físico:</label>
 				<select name='alteracoesEvolutivasNoExameFisico' id='alteracoesEvolutivasNoExameFisico' class='selectOne'>
 					<option value=''			> -----			</option>
-					<option value='melhora'		> Melhora		</option>
-					<option value='piora'		> Piora			</option>
-					<option value='inalterada'	> Inalterada	</option>
+					<option value='sim'			> Sim			</option>
+					<option value='nao'			> Não			</option>
+					<option value='ignorado'	> Ignorado		</option>
 				</select>
 			</div>
 			<div id='divAvaliacaoGeral' class='primary'>
@@ -424,9 +406,9 @@
 				<label for='data_rx'> Data do RX:</label>
 				<input  name="data_rx" id="data_rx" type="text" class='data'/>
 			</div>
-			<div id='divAvaliacaoPos90dias' class='primary required'>
-			<label> Avaliação: </label>
-			<select name='avaliacaoPos90dias' class='selectOne required'>
+			<div id='divAvaliacaoPos' class='primary required'>
+			<label> Avaliação(Comparar o RXT inicial com o atual): </label>
+			<select name='avaliacaoPos' id='avaliacaoPos' class='selectOne required'>
 				<option>  ----  </option>
 				<option value='piora'>Piora</option>
 				<option value='melhora'>Melhora</option>
@@ -437,7 +419,7 @@
 		</fieldset>
 		<fieldset>
 			<legend> Diagnóstico </legend>
-			<div id='divDiagnostico90dias' class='primary'>
+			<div id='divDiagnostico' class='primary'>
 				<label for='diagnostico'> Diagnóstico: </label>
 				<select name='diagnostico' id='diagnostico' class='selectOne'>
 					<option value="melhora"    type="radio" />TB pulmonar       </option>

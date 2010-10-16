@@ -7,6 +7,34 @@
 
 //global functions
 
+function writeTable(xmlstring, div){
+	var booleanColor = true;
+	var xml = (new DOMParser()).parseFromString(xmlstring, "text/xml");
+	var table = $('<table />');
+	table.addClass('registers');
+	table.css('border-collapse', 'collapse');
+	var tbody = $('<tbody />');
+	var elements = xml.getElementsByTagName('documento')[0].childNodes;
+	$(elements).each(function(){
+		var el = $(this).get(0);
+		var tr = $('<tr />');
+		if($(el)[0].nodeType == xml.ELEMENT_NODE){
+			var tagname = $(el)[0].tagName;
+			tr.append('<th>' + tagname +'</th>');
+			tr.append('<td>' + $(el).text()+'</td>');
+			if (booleanColor)
+				tr.css('background-color','#B9D3EE');
+			booleanColor = !booleanColor;
+			tbody.append(tr);
+			tbody.css('color','black');
+			tbody.css('text-align','left');
+			table.append(tbody);
+			table.css('margin','35px');
+			div.html(table);
+		}
+	});
+}
+
 function getScrollXY() {
 	var myWidth = 0, myHeight = 0;
 	if( typeof( window.innerWidth ) == 'number' ) {
@@ -27,6 +55,40 @@ function getScrollXY() {
 
 //Document is ready, let's play
 $(document).ready(function(){
+		$.fn.showFields = function(argumento){
+			var dep = argumento;
+			for(div in dep){
+				var elems = $('*', dep[div]);
+				$(elems).each(function(){
+					var element = $(this);
+					if (   element[0].nodeName != 'FIELDSET'
+						&& element[0].nodeName != 'SMALL'
+						&& element[0].nodeName != 'OPTION')
+						$(this).addClass('required');
+					});
+				if($(dep[div]).css('display') != 'block')
+					$(dep[div]).toggle(function() {
+						$(this).css('background-color', hlcolor);
+						$(this).animate({backgroundColor : "white"}, 4000);
+					});
+			}
+		}
+		$.fn.hideFields = function(argumento){
+			var dep = argumento;
+			for(div in dep){
+				var elems = $('*', dep[div]);
+				$(elems).each(function(){
+					var element = $(this);
+					if (   element[0].nodeName != 'FIELDSET'
+						&& element[0].nodeName != 'SMALL'
+						&& element[0].nodeName != 'OPTION')
+					$(this).removeClass('required');
+				});
+				if($(dep[div]).css('display') != 'none')
+					$(dep[div]).toggle();
+			}
+		}
+
 	var hlcolor = '#FFF8C6';
 
 	$('.data').datepicker({
@@ -73,38 +135,11 @@ $(document).ready(function(){
 		var dep = new Array();
 		dep[0] = '#divUnidadeReferenciaSeguimento';
 		// Se sim, disponibilizar colunas listadas a cima
-		if($(this).val()=='nao'){
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).addClass('required');
-				});
-				if($(dep[div]).css('display') != 'block')
-					$(dep[div]).toggle(function() {
-						$(this).css('background-color', hlcolor);
-						$(this).animate({backgroundColor : "white"}, 4000);
-					});
-			}
-		}
+		if($(this).val()=='nao')
+			$().showFields(dep);
 		// Se nao, ocultar colunas listadas a cima
-		else{
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).removeClass('required');
-				});
-				if($(dep[div]).css('display') != 'none')
-					$(dep[div]).toggle();
-			}
-		}
+		else
+			$().hideFields(dep);
 	});
 	//Foi prescrito TB?
 	$('#tratamentoPrescritoTB').change(function(){
@@ -113,26 +148,10 @@ $(document).ready(function(){
 		dep[1] = '#divTratamentoPrescritoTBFarmaco';
 		dep[2] = '#divReacoesAdversasTuberculostaticos';
 		dep[3] = '#divMudancaEsquemaTratamentoTB';
-		dep[4] = '#divInternacaoHospitalar';
-		dep[5] = '#divTosseDiminuida';
+		dep[4] = '#divTosseDiminuida';
 		// Se sim, disponibilizar colunas listadas a cima
-		if($(this).val()=='sim'){
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).addClass('required');
-				});
-				if($(dep[div]).css('display') != 'block')
-					$(dep[div]).toggle(function() {
-						$(this).css('background-color', hlcolor);
-						$(this).animate({backgroundColor : "white"}, 4000);
-					});
-			}
-		}
+		if($(this).val()=='sim')
+			$().showFields(dep);
 		// Se nao, ocultar colunas listadas a cima
 		if($(this).val()=='nao'){
 			dep[7] = '#divReacoesAdversasTuberculostaticosMaiores';
@@ -143,18 +162,7 @@ $(document).ready(function(){
 			dep[12] = '#divMudancaMotivo';
 			dep[13] = '#divSuspensaoTratamentoTB';
 			dep[6] = '#divSuspensaoDiasTratamentoTB';
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).removeClass('required');
-				});
-				if($(dep[div]).css('display') != 'none')
-					$(dep[div]).toggle();
-			}
+			$().hideFields(dep);
 		}
 	});
 	$('#tratamentoPrescritoTBFarmacos_13').click(function(){
@@ -176,29 +184,15 @@ $(document).ready(function(){
 		dep[1] = '#divDataObito';
 		var ped = new Array();
 		ped[0] = '#divTosseDiminuida';
-		ped[1] = '#divPesoAtual90dias';
+		ped[1] = '#divPesoAtual';
 		ped[2] = '#divAlteracoesEvolutivasNoExameFisico';
-		ped[3] = '#divFebre90dias';
-		ped[4] = '#divExpectoracao90dias';
+		ped[3] = '#divFebre';
+		ped[4] = '#divExpectoracao';
 		ped[5] = '#divAvaliacaoGeral';
 		ped[6] = '#divOutrosSintomas';
 		// Se sim, disponibilizar colunas listadas a cima
 		if($(this).val()=='sim'){
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).addClass('required');
-				});
-				if($(dep[div]).css('display') != 'block')
-					$(dep[div]).toggle(function() {
-						$(this).css('background-color', hlcolor);
-						$(this).animate({backgroundColor : "white"}, 4000);
-					});
-			}
+			$().showFields(dep);
 			for(div in ped){
 				var elems = $('*', ped[div]);
 				$(elems).each(function(){
@@ -214,18 +208,7 @@ $(document).ready(function(){
 		}
 		// Se nao, ocultar colunas listadas a cima
 		if($(this).val()=='nao' || $(this).val()=='ignorado'){
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).removeClass('required');
-				});
-				if($(dep[div]).css('display') != 'none')
-					$(dep[div]).toggle();
-			}
+			$().hideFields(dep);
 			for(div in ped){
 				var elems = $('*', ped[div]);
 				$(elems).each(function(){
@@ -253,38 +236,11 @@ $(document).ready(function(){
 		dep[0] = '#divReacoesAdversasTuberculostaticosMaiores';
 		dep[1] = '#divReacoesAdversasTuberculostaticosMenores';
 		// Se sim, disponibilizar colunas listadas a cima
-		if($(this).val()=='sim'){
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).addClass('required');
-				});
-				if($(dep[div]).css('display') != 'block')
-					$(dep[div]).toggle(function() {
-						$(this).css('background-color', hlcolor);
-						$(this).animate({backgroundColor : "white"}, 4000);
-					});
-			}
-		}
+		if($(this).val()=='sim')
+			$().showFields(dep);
 		// Se nao, ocultar colunas listadas a cima
-		if($(this).val()=='nao' || $(this).val()=='ignorado'){
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).removeClass('required');
-				});
-				if($(dep[div]).css('display') != 'none')
-					$(dep[div]).toggle();
-			}
-		}
+		if($(this).val()=='nao' || $(this).val()=='ignorado')
+			$().hideFields(dep);
 	});
 	//Precisa mudar o tratamento?
 	$('#mudancaEsquemaTratamentoTB').change(function(){
@@ -366,46 +322,6 @@ $(document).ready(function(){
 
 	});
 
-	//Internacao Hospitalar?
-	$('#internacaoHospitalar').change(function(){
-		var dep = new Array();
-		dep[0] = '#divDataInternacao';
-		dep[1] = '#divDataAlta';
-		// Se sim, disponibilizar colunas listadas a cima
-		if($(this).val()=='sim'){
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).addClass('required');
-				});
-				if($(dep[div]).css('display') != 'block')
-					$(dep[div]).toggle(function() {
-						$(this).css('background-color', hlcolor);
-						$(this).animate({backgroundColor : "white"}, 4000);
-					});
-			}
-		}
-		// Se nao, ocultar colunas listadas a cima
-		if($(this).val()=='nao' || $(this).val()=='ignorado'){
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).removeClass('required');
-				});
-				if($(dep[div]).css('display') != 'none')
-					$(dep[div]).toggle();
-			}
-		}
-	});
-
 	$('#mudanca').click( function(){
 		if($('#mudanca').is(':checked')){
 			$('#data_mudanca').attr('disabled', true);
@@ -415,24 +331,25 @@ $(document).ready(function(){
 		}
 	});
 
-	$('#mudancaFarmacos_outros').click(function(){
-		if($(this).is(':checked')){
-			$('').attr('checked', 'true');
-			$('input[name=farmacos14]').removeAttr('disabled');
-			return;
-		}
-		$(this).removeAttr('checked');
-		$('input[name=farmacos14]').attr('disabled', 'true');
-		return;
-	});
-
 	//"Mudanca" enables input text
 	$('input[name=mudancaMotivo]:radio').click(function(){
 		if($(this).val() == "outro"){
 			$('input[name=outro_motivo]').removeAttr('disabled');
 		} else {
-			$('input[name=outro_motivo]').attr('disabled','true');
 			$('input[name=outro_motivo]').val('');
+			$('input[name=outro_motivo]').attr('disabled','true');
+		}
+	});
+
+	$('input[name=mudancaFarmacos]').click(function(){
+		if($(this).val() == 'outros')
+		{
+			if ($(this).is(':checked'))
+				$('input[name=farmacos14]').removeAttr('disabled');
+			else{
+				$('input[name=farmacos14]').val('');
+				$('input[name=farmacos14]').attr('disabled',true);
+			}
 		}
 	});
 
@@ -553,7 +470,10 @@ $(document).ready(function(){
 	);
 
 	//Load previous exams
-	var sUrl="/cgi-bin/neuraltb/retrieveExames.py";
+	var url=$(location).attr('href');
+	var numForm = url[url.length - 4];
+	var numPatient = url[url.length - 2];
+	var sUrl='../../../patientLastRegister/' + numForm + '/' + numPatient + '/';
 	var edits = new Object();
 
 	var returned = $.ajax({
@@ -561,24 +481,24 @@ $(document).ready(function(){
 		dataType:'html',
 		complete: function(xhr, textStatus){
 			var response = xhr.responseText;
-			if(textStatus = 'success'){
-				$('#divExames').html(response);
-				var sizeH =  0.9*(getScrollXY()[1] - 176) + 'px';
+			try{
+				var sizeH =  (getScrollXY()[1]) + 'px';
 				$('#divExames').height(sizeH);
-				//$('#divExames').css('overflow', 'all');
+				$('#divExames').css('top', '53px');
+				$('#divExames').css('overflow', 'all');
 				$('#divExames').jScrollPane({showArrows:true});
-				menuYloc = 176;
-				$(window).scroll(function () {  
-					var offset = menuYloc+$(document).scrollTop()+"px";  
-					$('div.jScrollPaneContainer').animate({top:offset},{duration:500,queue:false});  
-				});  
-				$('tr:odd','#divExames table').css(
-					"background-color", "#E0EEEE"
-				);
-			}else{
-				alert("Nao foi possível carregar exames anteriores");
+				menuYloc = 0;
+				$(window).scroll(function () {
+					var offset = menuYloc+$(document).scrollTop()+"px";
+					$('div.jScrollPaneContainer').animate({top:offset},{duration:500,queue:false});
+				});
+				writeTable(response,$('#divExames'));
+			}catch(e){
+				$('#divExames').html("A busca não encontrou resultados");
+				//console.log(e);
 			}
 		}
 	});
+
 	var menuYloc = null;
 });
