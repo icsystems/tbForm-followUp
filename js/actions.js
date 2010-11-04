@@ -464,7 +464,7 @@ $(document).ready(function(){
 		dep4[0] = '#divDataAltaHospitalar';
 		dep4[1] = '#divDataEncaminhamento';
 		dep4[2] = '#divDataInicioTratamentoUnidade';
-		if ($('#formulario').val()=='seguimentoClinico60')
+		if ($('#formulario').val()=='seguimentoClinico180')
 			if ($(this).val() == 'ubs' || $(this).val() == 'ambulatorioDeReferencia')
 			{
 				if (tipoTriagem == 'ubs' || tipoTriagem == 'ambulatorio')
