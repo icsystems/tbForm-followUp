@@ -142,18 +142,12 @@ $(document).ready(function(){
 	//Definindo o formulario
 	$('#formulario').change(function(){
 		var dep = new Array();
-		dep[0] = '#divLocalInternacao';
-		if($('#formulario').val() == 'seguimentoClinico60'){
+		if($('#formulario').val() == 'seguimentoClinico60')
 			$('#tituloRXTorax').html('RX de Tórax (60 dias)');
-			$().hideFields(dep);
-		}else if($('#formulario').val() == 'seguimentoClinico180'){
+		else if($('#formulario').val() == 'seguimentoClinico180')
 			$('#tituloRXTorax').html('RX de Tórax (180 dias)');
-			if ($('#internacaoHospitalar').val() == 'sim')
-				$().showFieldsWithoutRequirement(dep);
-		}else{
+		else
 			$('#tituloRXTorax').html('RX de Tórax');
-			$().hideFields(dep);
-		}
 	});
 
 	//Foi prescrito TB?
@@ -253,17 +247,12 @@ $(document).ready(function(){
 		var dep1 = new Array();
 		dep1[0] = '#divDataInternacao';
 		dep1[1] = '#divDataAlta';
-		var dep2 = new Array();
-		dep2[0] = '#divLocalInternacao';
 		if ($(this).val() == 'sim' && $('#formulario').val() == 'seguimentoClinico180'){
 			$().showFieldsWithoutRequirement(dep1);
-			$().showFieldsWithoutRequirement(dep2);
 		}else if ($(this).val() == 'sim' && $('#formulario').val() != 'seguimentoClinico180'){
 			$().showFieldsWithoutRequirement(dep1);
-			$().hideFields(dep2);
 		}else if ($(this).val() == 'nao'){
 			$().hideFields(dep1);
-			$().hideFields(dep2);
 		}
 	});
 	$('#encaminhamentoParaUbs').change(function(){
