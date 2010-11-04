@@ -249,33 +249,6 @@ $(document).ready(function(){
 		if($(this).val()=='nao' || $(this).val()=='ignorado')
 			$().hideFields(dep);
 	});
-	$('#seguimentoClinico').change(function(){
-		var dep1 = new Array();
-		dep1[0] = '#divInternacaoHospitalar';
-		var dep2 = new Array();
-		dep2[0] = '#divEncaminhamentoParaUbs';
-		var dep3 = new Array();
-		dep3[0] = '#divDataInternacao';
-		dep3[1] = '#divDataAlta';
-		var dep4 = new Array();
-		dep4[0] = '#divDataAltaHospitalar';
-		dep4[1] = '#divDataEncaminhamento';
-		dep4[2] = '#divDataInicioTratamentoUnidade';
-		if ($(this).val() == 'ubs'){
-			$().showFields(dep1);
-			$().hideFields(dep2);
-			$().hideFields(dep4);
-		}else if ($(this).val() == 'hospitalDeReferencia'){
-			$().showFields(dep2);
-			$().hideFields(dep1);
-			$().hideFields(dep3);
-		}else{
-			$().hideFields(dep1);
-			$().hideFields(dep2);
-			$().hideFields(dep3);
-			$().hideFields(dep4);
-		}
-	});
 	$('#internacaoHospitalar').change(function(){
 		var dep1 = new Array();
 		dep1[0] = '#divDataInternacao';
@@ -461,6 +434,70 @@ $(document).ready(function(){
 	});
 
 /*---------------------------- Other logics -----------------------------*/
+
+	$('select').each(function(){
+		if ($(this).attr('id') != 'formulario')
+			$(this).attr('disabled',true);
+	});
+	$('#formulario').change(function(){
+		if ($(this).val())
+			$('select').each(function(){
+				if ($(this).attr('id') != 'formulario')
+					$(this).removeAttr('disabled');
+			});
+		else
+			$('select').each(function(){
+				if ($(this).attr('id') != 'formulario')
+					$(this).attr('disabled',true);
+			});
+	});
+	var tipoTriagem = 'ubs';
+	$('#seguimentoClinico').change(function(){
+		var dep1 = new Array();
+		dep1[0] = '#divInternacaoHospitalar';
+		var dep2 = new Array();
+		dep2[0] = '#divEncaminhamentoParaUbs';
+		var dep3 = new Array();
+		dep3[0] = '#divDataInternacao';
+		dep3[1] = '#divDataAlta';
+		var dep4 = new Array();
+		dep4[0] = '#divDataAltaHospitalar';
+		dep4[1] = '#divDataEncaminhamento';
+		dep4[2] = '#divDataInicioTratamentoUnidade';
+		if ($('#formulario').val()=='seguimentoClinico60')
+			if ($(this).val() == 'ubs' || $(this).val() == 'ambulatorioDeReferencia')
+			{
+				if (tipoTriagem == 'ubs' || tipoTriagem == 'ambulatorio')
+					$().showFields(dep1);
+				if (tipoTriagem == 'hospital')
+					$().showFields(dep2);
+			}else{
+				$().hideFields(dep1);
+				$().hideFields(dep2);
+				$().hideFields(dep3);
+				$().hideFields(dep4);
+			}
+	});
+	$('#internacaoHospitalar').change(function(){
+		var dep = new Array();
+		dep[0] = '#divDataInternacao';
+		dep[1] = '#divDataAlta';
+		if ($(this).val() == 'sim')
+			$().showFieldsWithoutRequirement(dep);
+		else
+			$().hideFields(dep);
+	});
+	$('#encaminhamentoParaUbs').change(function(){
+		var dep = new Array();
+		dep[0] = '#divDataAltaHospitalar';
+		dep[1] = '#divDataEncaminhamento';
+		dep[2] = '#divDataInicioTratamentoUnidade';
+		if ($(this).val() == 'sim')
+			$().showFieldsWithoutRequirement(dep);
+		else
+			$().hideFields(dep);
+	});
+
 	$('#mudanca').click( function(){
 		if($('#mudanca').is(':checked')){
 			$('#data_mudanca').attr('disabled', true);
