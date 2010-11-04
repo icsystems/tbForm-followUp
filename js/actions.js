@@ -5,7 +5,7 @@
  * Date:   March 15th, 2010
  */
 
-//global functions
+/*-------------------------- Global Functions ------------------------------*/
 
 function writeTable(xmlstring, div){
 	var booleanColor = true;
@@ -52,45 +52,63 @@ function getScrollXY() {
 	}
 	return [ myWidth, myHeight ];
 }
+/*----------------------------------------------------------------------------*/
 
 //Document is ready, let's play
 $(document).ready(function(){
-		$.fn.showFields = function(argumento){
-			var dep = argumento;
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-						&& element[0].nodeName != 'SMALL'
-						&& element[0].nodeName != 'OPTION')
-						$(this).addClass('required');
-					});
-				if($(dep[div]).css('display') != 'block')
-					$(dep[div]).toggle(function() {
-						$(this).css('background-color', hlcolor);
-						$(this).animate({backgroundColor : "white"}, 4000);
-					});
-			}
-		}
-		$.fn.hideFields = function(argumento){
-			var dep = argumento;
-			for(div in dep){
-				var elems = $('*', dep[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-						&& element[0].nodeName != 'SMALL'
-						&& element[0].nodeName != 'OPTION')
-					$(this).removeClass('required');
+/*------------------------------Auxiliar Function------------------------------------*/
+	//Show fields
+	$.fn.showFields = function(argumento){
+		var dep = argumento;
+		for(div in dep){
+			var elems = $('*', dep[div]);
+			$(elems).each(function(){
+				var element = $(this);
+				if (   element[0].nodeName != 'FIELDSET'
+					&& element[0].nodeName != 'SMALL'
+					&& element[0].nodeName != 'OPTION')
+					$(this).addClass('required');
 				});
-				if($(dep[div]).css('display') != 'none')
-					$(dep[div]).toggle();
-			}
+			if($(dep[div]).css('display') != 'block')
+				$(dep[div]).toggle(function() {
+					$(this).css('background-color', hlcolor);
+					$(this).animate({backgroundColor : "white"}, 4000);
+				});
 		}
+	}
+	//Show fields without add "required" class
+	$.fn.showFieldsWithoutRequirement = function(argumento){
+		var dep = argumento;
+		for(div in dep){
+			var elems = $('*', dep[div]);
+			if($(dep[div]).css('display') != 'block')
+				$(dep[div]).toggle(function() {
+					$(this).css('background-color', hlcolor);
+					$(this).animate({backgroundColor : "white"}, 4000);
+				});
+		}
+	}
+	//Hide fields
+	$.fn.hideFields = function(argumento){
+		var dep = argumento;
+		for(div in dep){
+			var elems = $('*', dep[div]);
+			$(elems).each(function(){
+				var element = $(this);
+				if (   element[0].nodeName != 'FIELDSET'
+					&& element[0].nodeName != 'SMALL'
+					&& element[0].nodeName != 'OPTION')
+				$(this).removeClass('required');
+			});
+			if($(dep[div]).css('display') != 'none')
+				$(dep[div]).toggle();
+		}
+	}
+/*----------------------------------------------------------------------------*/
 
 	var hlcolor = '#FFF8C6';
 
+/*------------------------------ Data Quality  ----------------------------------*/
 	$('.data').datepicker({
 		dateFormat: 'dd/mm/yy',
 		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
@@ -118,29 +136,26 @@ $(document).ready(function(){
 			return false;
 		}
 	});
-
-	//Toggle options
+/*----------------------------------------------------------------------------*/
+/*--------------------------- Secondary Fields ---------------------------------*/
 
 	//Definindo o formulario
 	$('#formulario').change(function(){
-		if($('#formulario').val() == 'seguimentoClinico60')
+		var dep = new Array();
+		dep[0] = '#divLocalInternacao';
+		if($('#formulario').val() == 'seguimentoClinico60'){
 			$('#tituloRXTorax').html('RX de Tórax (60 dias)');
-		else if($('#formulario').val() == 'seguimentoClinico180')
+			$().hideFields(dep);
+		}else if($('#formulario').val() == 'seguimentoClinico180'){
 			$('#tituloRXTorax').html('RX de Tórax (180 dias)');
-		else
+			if ($('#internacaoHospitalar').val() == 'sim')
+				$().showFieldsWithoutRequirement(dep);
+		}else{
 			$('#tituloRXTorax').html('RX de Tórax');
+			$().hideFields(dep);
+		}
 	});
 
-	$('#seguimentoDuranteInternacao').change(function(){
-		var dep = new Array();
-		dep[0] = '#divUnidadeReferenciaSeguimento';
-		// Se sim, disponibilizar colunas listadas a cima
-		if($(this).val()=='nao')
-			$().showFields(dep);
-		// Se nao, ocultar colunas listadas a cima
-		else
-			$().hideFields(dep);
-	});
 	//Foi prescrito TB?
 	$('#tratamentoPrescritoTB').change(function(){
 		var dep = new Array();
@@ -165,19 +180,7 @@ $(document).ready(function(){
 			$().hideFields(dep);
 		}
 	});
-	$('#tratamentoPrescritoTBFarmacos_13').click(function(){
-		if($(this).is(':checked')){
-			$('').attr('checked', 'true');
-			fieldOutros = $('')
-			$('input[name=farmacosOutros]').removeAttr('disabled');
-			return;
-		}
-		$(this).removeAttr('checked');
-		$('input[name=farmacosOutros]').val('');
-		$('input[name=farmacosOutros]').attr('disabled', 'true');
-		return;
-	});
-	//Houve obito?
+
 	$('#obito').change(function(){
 		var dep = new Array();
 		dep[0] = '#divCasoObito';
@@ -216,7 +219,11 @@ $(document).ready(function(){
 					if (   element[0].nodeName != 'FIELDSET'
 					    && element[0].nodeName != 'SMALL'
 					    && element[0].nodeName != 'OPTION')
-						$(this).addClass('required');
+						if (element.attr('id') == 'tosseDiminuida')
+							if ($('#tratamentoPrescritoTB').val() == 'sim')
+								$(this).addClass('required');
+							else
+								$(this).addClass('required');
 				});
 				if($(ped[div]).css('display') != 'block'){
 					if(div == 0 && $('#tratamentoPrescritoTB').val()!='sim')
@@ -240,6 +247,60 @@ $(document).ready(function(){
 			$().showFields(dep);
 		// Se nao, ocultar colunas listadas a cima
 		if($(this).val()=='nao' || $(this).val()=='ignorado')
+			$().hideFields(dep);
+	});
+	$('#seguimentoClinico').change(function(){
+		var dep1 = new Array();
+		dep1[0] = '#divInternacaoHospitalar';
+		var dep2 = new Array();
+		dep2[0] = '#divEncaminhamentoParaUbs';
+		var dep3 = new Array();
+		dep3[0] = '#divDataInternacao';
+		dep3[1] = '#divDataAlta';
+		var dep4 = new Array();
+		dep4[0] = '#divDataAltaHospitalar';
+		dep4[1] = '#divDataEncaminhamento';
+		dep4[2] = '#divDataInicioTratamentoUnidade';
+		if ($(this).val() == 'ubs'){
+			$().showFields(dep1);
+			$().hideFields(dep2);
+			$().hideFields(dep4);
+		}else if ($(this).val() == 'hospitalDeReferencia'){
+			$().showFields(dep2);
+			$().hideFields(dep1);
+			$().hideFields(dep3);
+		}else{
+			$().hideFields(dep1);
+			$().hideFields(dep2);
+			$().hideFields(dep3);
+			$().hideFields(dep4);
+		}
+	});
+	$('#internacaoHospitalar').change(function(){
+		var dep1 = new Array();
+		dep1[0] = '#divDataInternacao';
+		dep1[1] = '#divDataAlta';
+		var dep2 = new Array();
+		dep2[0] = '#divLocalInternacao';
+		if ($(this).val() == 'sim' && $('#formulario').val() == 'seguimentoClinico180'){
+			$().showFieldsWithoutRequirement(dep1);
+			$().showFieldsWithoutRequirement(dep2);
+		}else if ($(this).val() == 'sim' && $('#formulario').val() != 'seguimentoClinico180'){
+			$().showFieldsWithoutRequirement(dep1);
+			$().hideFields(dep2);
+		}else if ($(this).val() == 'nao'){
+			$().hideFields(dep1);
+			$().hideFields(dep2);
+		}
+	});
+	$('#encaminhamentoParaUbs').change(function(){
+		var dep = new Array();
+		dep[0] = '#divDataAltaHospitalar';
+		dep[1] = '#divDataEncaminhamento';
+		dep[2] = '#divDataInicioTratamentoUnidade';
+		if ($(this).val() == 'sim')
+			$().showFieldsWithoutRequirement(dep);
+		else
 			$().hideFields(dep);
 	});
 	//Precisa mudar o tratamento?
@@ -322,36 +383,6 @@ $(document).ready(function(){
 
 	});
 
-	$('#mudanca').click( function(){
-		if($('#mudanca').is(':checked')){
-			$('#data_mudanca').attr('disabled', true);
-			$('#data_mudanca').val('')
-		} else {
-			$('#data_mudanca').removeAttr('disabled');
-		}
-	});
-
-	//"Mudanca" enables input text
-	$('input[name=mudancaMotivo]:radio').click(function(){
-		if($(this).val() == "outro"){
-			$('input[name=outro_motivo]').removeAttr('disabled');
-		} else {
-			$('input[name=outro_motivo]').val('');
-			$('input[name=outro_motivo]').attr('disabled','true');
-		}
-	});
-
-	$('input[name=mudancaFarmacos]').click(function(){
-		if($(this).val() == 'outros')
-		{
-			if ($(this).is(':checked'))
-				$('input[name=farmacos14]').removeAttr('disabled');
-			else{
-				$('input[name=farmacos14]').val('');
-				$('input[name=farmacos14]').attr('disabled',true);
-			}
-		}
-	});
 
 	//Suspensao do Tratamento
 	$('#suspensaoTratamentoTB').change(function(){
@@ -428,6 +459,51 @@ $(document).ready(function(){
 			}
 		}
 	});
+
+/*---------------------------- Other logics -----------------------------*/
+	$('#mudanca').click( function(){
+		if($('#mudanca').is(':checked')){
+			$('#data_mudanca').attr('disabled', true);
+			$('#data_mudanca').val('')
+		} else {
+			$('#data_mudanca').removeAttr('disabled');
+		}
+	});
+	$('#tratamentoPrescritoTBFarmacos_13').click(function(){
+		if($(this).is(':checked')){
+			$('').attr('checked', 'true');
+			fieldOutros = $('')
+			$('input[name=farmacosOutros]').removeAttr('disabled');
+			return;
+		}
+		$(this).removeAttr('checked');
+		$('input[name=farmacosOutros]').val('');
+		$('input[name=farmacosOutros]').attr('disabled', 'true');
+		return;
+	});
+	//Houve obito?
+
+	//"Mudanca" enables input text
+	$('input[name=mudancaMotivo]:radio').click(function(){
+		if($(this).val() == "outro"){
+			$('input[name=outro_motivo]').removeAttr('disabled');
+		} else {
+			$('input[name=outro_motivo]').val('');
+			$('input[name=outro_motivo]').attr('disabled','true');
+		}
+	});
+
+	$('input[name=mudancaFarmacos]').click(function(){
+		if($(this).val() == 'outros')
+		{
+			if ($(this).is(':checked'))
+				$('input[name=farmacos14]').removeAttr('disabled');
+			else{
+				$('input[name=farmacos14]').val('');
+				$('input[name=farmacos14]').attr('disabled',true);
+			}
+		}
+	});
 	$('#diagnosticoDifOutros').click(function(){
 		if($(this).is(':checked')){
 			$('').attr('checked', 'true');
@@ -439,11 +515,10 @@ $(document).ready(function(){
 		$('input[name=outro_diagnostico_sim]').attr('disabled', 'true');
 		return;
 	});
-;
+/*---------------------------------------------------------------------------*/
 	$('div.secondary').css('display', 'none');
-	
-	//\Toggle Options
-
+/*---------------------------------------------------------------------------*/
+	//Temporary Solution
 	// All primary fields are required
 	$('div.primary').each(function(){
 		var elem_primary = $('*', this);
@@ -464,17 +539,14 @@ $(document).ready(function(){
 		   && element[0].nodeName != 'OPTION')
 			$(this).removeClass('required');
 	});
-
-	//Form Validation
-	$('#form_followup').validate(
-	);
-
-	//Load previous exams
+/*---------------------------------------------------------------------------*/
+/*------------------------- Load Exames Form --------------------------------*/
 	var url=$(location).attr('href');
 	var numForm = url[url.length - 4];
 	var numPatient = url[url.length - 2];
 	var sUrl='../../../patientLastRegister/' + numForm + '/' + numPatient + '/';
 	var edits = new Object();
+	var menuYloc = null;
 
 	var returned = $.ajax({
 		url:sUrl,
@@ -499,6 +571,8 @@ $(document).ready(function(){
 			}
 		}
 	});
-
-	var menuYloc = null;
+/*---------------------------------------------------------------------------*/
+/*-------------------------- Form Validation --------------------------------*/
+	$('#form_followup').validate();
+/*---------------------------------------------------------------------------*/
 });

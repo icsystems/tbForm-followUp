@@ -15,16 +15,6 @@
 	<script src='./js/actions.js' type='text/javascript' ></script>
 </head>
 <body>
-<div id='menu'>
-	<ul>
-		<li><a href='#'>Formulários</a></li>
-		<li><a href='#'>Operaç&otilde;es</a></li>
-		<li><a href='#'>Análise</a></li>
-		<li><a href='#'>Listar</a></li>
-		<li><a href='#'>Backup</a></li>
-		<li class='help'><a href='#'>Ajuda</a></li>
-	</ul>
-</div>
 <div id='mainFrame'>
 <div id='divExames'>
 	Carregando <img src='images/loading.gif'>
@@ -41,17 +31,54 @@
 					<option value='seguimentoClinico180'> Seguimento Clínico 180 dias	</option>
 				</select>
 			</div>
-			<div id='divSeguimentoDuranteInternacao' class='primary'>
-				<label for='seguimentoDuranteInternacao'> Seguimento clínico durante internação:</label>
-				<select name='seguimentoDuranteInternacao' id='seguimentoDuranteInternacao' class='selectOne'>
-					<option value=''					> ------ 							</option>
-					<option value='sim'	> Sim </option>
-					<option value='nao' > Não </option>
+			<div id='divSeguimentoClinico' class='primary'>
+				<label for='seguimentoClinico'> Seguimento clínico:</label>
+				<select name='seguimentoClinico' id='seguimentoClinico' class='selectOne'>
+					<option value=''						> ----						</option>
+					<option value='ubs'						> UBS						</option>
+					<option value='hospitalDeReferencia'	> Hospital de Referência	</option>
+					<option value='ambulatorioDeReferencia'	> Ambulatório de Referência	</option>
 				</select>
 			</div>
-			<div id='divUnidadeReferenciaSeguimento' class='secondary'>
-				<label for='unidadeReferenciaSeguimento'>Unidade de Referência: </label>
-				<input type='text' name='unidadeReferenciaSeguimento' id='unidadeReferenciaSeguimento' class='text'>
+			<div id='divInternacaoHospitalar' class='secondary'>
+				<label for='internacaoHospitalar'>Houve internação hospitalar? </label>
+				<select name='internacaoHospitalar' id='internacaoHospitalar' class='selectOne'>
+					<option value='ignorado'>Ignorado	</option>
+					<option value='sim'		>Sim		</option>
+					<option value='nao'		>Não		</option>
+				</select>
+			</div>
+			<div id='divDataInternacao' class='secondary'>
+				<label for='dataInternacao'>Data da internação</label>
+				<input name='dataInternacao' id='dataInternacao' class='data' maxlength='5' />
+			</div>
+			<div id='divDataAlta' class='secondary'>
+				<label for='dataAlta'>Data da alta</label>
+				<input name='dataAlta' id='dataAlta' class='data' maxlength='5' />
+			</div>
+			<div id='divEncaminhamentoParaUbs' class='secondary'>
+				<label for='encaminhamentoParaUbs'>Houve encaminhamento para UBS?</label>
+				<select name='encaminhamentoParaUbs' id='encaminhamentoParaUbs' class='selectOne'>
+					<option value='ignorado'>Ignorado	</option>
+					<option value='sim'		>Sim		</option>
+					<option value='nao'		>Não		</option>
+				</select>
+			</div>
+			<div id='divDataAltaHospitalar' class='secondary'>
+				<label for='dataAltaHospitalar'>Data da alta hospitalar</label>
+				<input name='dataAltaHospitalar' id='dataAltaHospitalar' class='data' maxlength='5' />
+			</div>
+			<div id='divDataEncaminhamento' class='secondary'>
+				<label for='dataEncaminhamento'>Data do encaminhamento</label>
+				<input name='dataEncaminhamento' id='dataEncaminhamento' class='data' maxlength='5' />
+			</div>
+			<div id='divDataInicioTratamentoUnidade' class='secondary'>
+				<label for='dataInicioTratamentoUnidade'>Data do início do tratamento da unidade</label>
+				<input name='dataInicioTratamentoUnidade' id='dataInicioTratamentoUnidade' class='data' maxlength='5' />
+			</div>
+			<div id='divLocalInternacao' class='secondary'>
+				<label for='localInternacao'>Local da Internação</label>
+				<input name='localInternacao' id='localInternacao' class='text' />
 			</div>
 			<div id='divTratamentoPrescritoTB' class='primary'>
 				<label for='tratamentoPrescritoTB'>Tratamento prescrito para TB:</label>
