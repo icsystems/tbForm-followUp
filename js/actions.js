@@ -213,11 +213,14 @@ $(document).ready(function(){
 					if (   element[0].nodeName != 'FIELDSET'
 					    && element[0].nodeName != 'SMALL'
 					    && element[0].nodeName != 'OPTION')
-						if (element.attr('id') == 'tosseDiminuida')
+					{
+						if ($(this).attr('id') == 'tosseDiminuida')
 							if ($('#tratamentoPrescritoTB').val() == 'sim')
 								$(this).addClass('required');
 							else
-								$(this).addClass('required');
+								$(this).removeClass('required');
+						$(this).addClass('required');
+					}
 				});
 				if($(ped[div]).css('display') != 'block'){
 					if(div == 0 && $('#tratamentoPrescritoTB').val()!='sim')
