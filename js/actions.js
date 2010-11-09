@@ -14,6 +14,8 @@ function writeTable(xmlstring, div){
 	table.addClass('registers');
 	table.css('border-collapse', 'collapse');
 	var tbody = $('<tbody />');
+	if (xml.getElementsByTagName('error')[0] == undefined)
+		throw "Nothing to write"
 	var elements = xml.getElementsByTagName('documento')[0].childNodes;
 	$(elements).each(function(){
 		var el = $(this).get(0);
@@ -61,14 +63,20 @@ $(document).ready(function(){
 	//Relation between forms
 	//Diagnóstico - Consulta e FollowUp
 	var urlString = $(location).attr('href');
+	var urlArray = urlString.split('/');
 	var numPaciente = urlString[urlString.length - 2];
-	if (urlString.search("edit") != -1)
+	var numArgs = 3;
+	if (urlString.search("edit") != -1){
 		var numForm = parseInt(urlString[urlString.length - 4]);
-	else
+		numArgs++;
+	}else
 		var numForm = parseInt(urlString[urlString.length - 4]) + 1;
+	var urlbase = '';
+	for (var j = 0; j < urlArray.length - numArgs-1; j++)
+		urlbase += urlArray[j] + '/';
 	$.ajax({
 		type: 'POST',
-		url:'../../../patientLastRegister/' + numForm + '/' + numPaciente + '/',
+		url: urlbase + '/patientLastRegister/' + numForm + '/' + numPaciente + '/',
 		dataType: "html",
 		success: function(text){
 			if (window.DOMParser)
@@ -80,123 +88,120 @@ $(document).ready(function(){
 				xml.async="false";
 				xml.loadXML(text);
 			}
-			//console.log(text);
-			//console.log(xml);
-			if (urlString.search("edit") != -1){
-			//Edit
-				var elements = xml.getElementsByTagName('form_followup')[0].childNodes;
-				$(elements).each(function(){
-					var el = $(this).get(0);
-					if($(el)[0].nodeType == xml.ELEMENT_NODE){
+			if (xml.getElementsByTagName('error')[0] == undefined){
+				var elements = xml.getElementsByTagName('documento')[0].childNodes;
+				if (urlString.search("edit") != -1){
+					//Edit
+					$(elements).each(function(){
+						var el = $(this).get(0);
+						if($(el)[0].nodeType == xml.ELEMENT_NODE){
+							var tagname = $(el)[0].tagName;
+							idDiv = $('#'+tagname).parent().attr('id');
+							var hlcolor = '#FFF8C6';
+							//Checkbox
+							if (tagname == 'tratamentoPrescritoTBFarmacos')
+							{
+								$('input[name=tratamentoPrescritoTBFarmacos]').each(function(){
+									if ($(el).text().search($(this).val()) != -1)
+										$(this).attr('checked',true);
+								});
+							}
+							if (tagname == 'farmacosOutros')
+							{
+								$('#tratamentoPrescritoTBFarmacos_13').attr('checked',true);
+								$('#'+tagname).removeAttr('disabled');
+							}
+							if (tagname == 'reacoesAdversasTuberculostaticosMaiores')
+							{
+								$('input[name=reacoesAdversasTuberculostaticosMaiores]').each(function(){
+									if ($(el).text().search($(this).val()) != -1)
+										$(this).attr('checked',true);
+								});
+							}
+							if (tagname == 'reacoesAdversasTuberculostaticosMenores')
+							{
+								$('input[name=reacoesAdversasTuberculostaticosMenores]').each(function(){
+									if ($(el).text().search($(this).val()) != -1)
+										$(this).attr('checked',true);
+								});
+							}
+							if (tagname == 'mudancaFarmacos')
+							{
+								$('input[name=mudancaFarmacos]').each(function(){
+									if ($(el).text().search($(this).val()) != -1)
+										$(this).attr('checked',true);
+								});
+							}
+							if (tagname == 'farmacos14')
+							{
+								$('input[name=mudancaFarmacos]').each(function(){
+									if ($(this).val() == 'outros')
+											$(this).attr('checked',true);
+								});
+								$('#' + tagname).removeAttr('disabled');
+							}
+							if (tagname == 'mudancaMotivo')
+							{
+								$('input[name=mudancaMotivo]').each(function(){
+									if ($(el).text().search($(this).val()) != -1)
+										$(this).click();
+								});
+							}
+							if (tagname == 'mudanca')
+							{
+								$('#'+tagname).attr('checked',true);
+								$('#data_mudanca').attr('disabled',true);
+							}
+							if (tagname == 'diagnosticoDiferenteTB')
+							{
+								$('input[name=diagnosticoDiferenteTB]').each(function(){
+									if ($(el).text().search($(this).val()) != -1)
+										$(this).attr('checked',true);
+								});
+							}
+							//Setting values
+							$('#'+tagname).val($(el).text());
+							$('#'+tagname).change();
+						}
+					});
+				}else{
+				//Relation
+					$(elements).each(function(){
+						var el = $(this).get(0);
+						if($(el)[0].nodeType == xml.ELEMENT_NODE){
 						var tagname = $(el)[0].tagName;
-						//console.log(tagname + ' : ' + $(el).text());
 						idDiv = $('#'+tagname).parent().attr('id');
 						var hlcolor = '#FFF8C6';
-						//Checkbox
+						if (tagname == 'diagnostico')
+						$('#' + tagname).val($(el).text());
+						if (tagname == 'tratamentoPrescritoTB')
+						{
+							if ($(el).text() == '')
+								$('#' + tagname).val('ignorado');
+							else
+								$('#' + tagname).val($(el).text());
+						}
+						if (tagname == 'observacoes')
+							$('#' + tagname).val($(el).text());
+						if (tagname == 'data_inicio')
+							$('#' + tagname).val($(el).text());
 						if (tagname == 'tratamentoPrescritoTBFarmacos')
 						{
 							$('input[name=tratamentoPrescritoTBFarmacos]').each(function(){
-								if ($(el).text().search($(this).val()) != -1)
+									if ($(el).text().search($(this).val()) != -1)
 									$(this).attr('checked',true);
-							});
+									});
 						}
 						if (tagname == 'farmacosOutros')
 						{
 							$('#tratamentoPrescritoTBFarmacos_13').attr('checked',true);
 							$('#'+tagname).removeAttr('disabled');
-						}
-						if (tagname == 'reacoesAdversasTuberculostaticosMaiores')
-						{
-							$('input[name=reacoesAdversasTuberculostaticosMaiores]').each(function(){
-								if ($(el).text().search($(this).val()) != -1)
-									$(this).attr('checked',true);
-							});
-						}
-						if (tagname == 'reacoesAdversasTuberculostaticosMenores')
-						{
-							$('input[name=reacoesAdversasTuberculostaticosMenores]').each(function(){
-								if ($(el).text().search($(this).val()) != -1)
-									$(this).attr('checked',true);
-							});
-						}
-						if (tagname == 'mudancaFarmacos')
-						{
-							$('input[name=mudancaFarmacos]').each(function(){
-								if ($(el).text().search($(this).val()) != -1)
-									$(this).attr('checked',true);
-							});
-						}
-						if (tagname == 'farmacos14')
-						{
-							$('input[name=mudancaFarmacos]').each(function(){
-								if ($(this).val() == 'outros')
-										$(this).attr('checked',true);
-							});
-							$('#' + tagname).removeAttr('disabled');
-						}
-						if (tagname == 'mudancaMotivo')
-						{
-							$('input[name=mudancaMotivo]').each(function(){
-								if ($(el).text().search($(this).val()) != -1)
-									$(this).click();
-							});
-						}
-						if (tagname == 'mudanca')
-						{
-							$('#'+tagname).attr('checked',true);
-							$('#data_mudanca').attr('disabled',true);
-						}
-						if (tagname == 'diagnosticoDiferenteTB')
-						{
-							$('input[name=diagnosticoDiferenteTB]').each(function(){
-								if ($(el).text().search($(this).val()) != -1)
-									$(this).attr('checked',true);
-							});
-						}
-						//Setting values
-						$('#'+tagname).val($(el).text());
-						$('#'+tagname).change();
-					}
-				});
-			}else{
-			//Relation
-				var elements = xml.getElementsByTagName('documento')[0].childNodes;
-				$(elements).each(function(){
-					var el = $(this).get(0);
-					if($(el)[0].nodeType == xml.ELEMENT_NODE){
-					var tagname = $(el)[0].tagName;
-					idDiv = $('#'+tagname).parent().attr('id');
-					//console.log(tagname + ' : ' + $(el).text());
-					var hlcolor = '#FFF8C6';
-					if (tagname == 'diagnostico')
-					$('#' + tagname).val($(el).text());
-					if (tagname == 'tratamentoPrescritoTB')
-					{
-						if ($(el).text() == '')
-							$('#' + tagname).val('ignorado');
-						else
 							$('#' + tagname).val($(el).text());
-					}
-					if (tagname == 'observacoes')
-						$('#' + tagname).val($(el).text());
-					if (tagname == 'data_inicio')
-						$('#' + tagname).val($(el).text());
-					if (tagname == 'tratamentoPrescritoTBFarmacos')
-					{
-						$('input[name=tratamentoPrescritoTBFarmacos]').each(function(){
-								if ($(el).text().search($(this).val()) != -1)
-								$(this).attr('checked',true);
-								});
-					}
-					if (tagname == 'farmacosOutros')
-					{
-						$('#tratamentoPrescritoTBFarmacos_13').attr('checked',true);
-						$('#'+tagname).removeAttr('disabled');
-						$('#' + tagname).val($(el).text());
-					}
-					$('#' + tagname).change();
-					}
-				});
+						}
+						$('#' + tagname).change();
+						}
+					});
+				}
 			}
 		}
 	});
@@ -588,7 +593,15 @@ $(document).ready(function(){
 					$(this).attr('disabled',true);
 			});
 	});
-	var tipoTriagem = 'ubs';
+	var tipoTriagem = '';
+	$.ajax({
+		type: 'POST',
+		url:'../../../patientLastRegister/' + numForm + '/' + numPaciente + '/',
+		dataType: "html",
+		success: function(text){
+			tipoTriagem = '';
+		}
+	});
 	$('#seguimentoClinico').change(function(){
 		var dep1 = new Array();
 		dep1[0] = '#divInternacaoHospitalar';
@@ -741,7 +754,6 @@ $(document).ready(function(){
 				writeTable(response,$('#divExames'));
 			}catch(e){
 				$('#divExames').html("A busca não encontrou resultados");
-				//console.log(e);
 			}
 		}
 	});
