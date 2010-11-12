@@ -594,14 +594,21 @@ $(document).ready(function(){
 					$(this).attr('disabled',true);
 			});
 	});
-	var tipoTriagem = '';
+	var triagem = '';
+	var patientId = urlString[urlString.length-2];
 	$.ajax({
 		type: 'POST',
+		url: 'https://gruyere.lps.ufrj.br/~fferreira/sapem/triagemName/' + patientId + '/',
 		dataType: "html",
 		success: function(text){
-			tipoTriagem = '';
+			triagem = text;
 		}
 	});
+	var tipoTriagem = '';
+	if (triagem.search('Ambulatório') != -1)
+		tipoTriagem = 'ambulatorio';
+	else if (triagem.search('Hospital') != -1)
+		tipoTriagem = 'hospital';
 	$('#seguimentoClinico').change(function(){
 		var dep1 = new Array();
 		dep1[0] = '#divInternacaoHospitalar';
