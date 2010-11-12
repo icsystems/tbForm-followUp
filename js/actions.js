@@ -735,8 +735,8 @@ $(document).ready(function(){
 	});
 /*---------------------------------------------------------------------------*/
 /*------------------------- Load Exames Form --------------------------------*/
-	/*var url=$(location).attr('href');
-	var numForm = url[url.length - 4];
+	var url=$(location).attr('href');
+	var numForm = parseInt(url[url.length - 4],10) - 1;
 	var numPatient = url[url.length - 2];
 	var sUrl='../../../patientLastRegister/' + numForm + '/' + numPatient + '/';
 	var edits = new Object();
@@ -763,7 +763,7 @@ $(document).ready(function(){
 				$('#divExames').html("A busca não encontrou resultados");
 			}
 		}
-	});*/
+	});
 /*---------------------------------------------------------------------------*/
 /*-------------------------- Form Validation --------------------------------*/
 	$('#form_followup').validate();
