@@ -7,46 +7,6 @@
 
 /*-------------------------- Global Functions ------------------------------*/
 
-(function($){
-	$.fn.writePortugueseDate = function(){
-		var element = $(this[0]);
-		var mydate=new Date()
-		var year=mydate.getYear()
-		if (year<2000)
-		year += (year < 1900) ? 1900 : 0
-		var day=mydate.getDay()
-		var month=mydate.getMonth()
-		var daym=mydate.getDate()
-		if (daym<10)
-		daym="0"+daym
-		var dayarray=new Array(
-			"Domingo",
-			"Segunda-feira",
-			"Terça-feira",
-			"Quarta-feira",
-			"Quinta-feira",
-			"Sexta-feira",
-			"Sábado"
-		);
-		var montharray=new Array(
-			"de Janeiro de ",
-			"de Fevereiro de ",
-			"de Março de ",
-			"de Abril de ",
-			"de Maio de ",
-			"de Junho de",
-			"de Julho de ",
-			"de Agosto de ",
-			"de Setembro de ",
-			"de Outubro de ",
-			"de Novembro de ",
-			"de Dezembro de "
-		);
-		var msg = dayarray[day]+", "+daym+" "+montharray[month]+year;
-		element.val(msg);
-	};
-})(jQuery);
-
 function writeTable(xmlstring, div){
 	var booleanColor = true;
 	var xml = (new DOMParser()).parseFromString(xmlstring, "text/xml");
@@ -103,20 +63,19 @@ $(document).ready(function(){
 	//Relation between forms
 	//Diagnóstico - Consulta e FollowUp
 	var urlString = $(location).attr('href');
+	var urlbase = 'https://gruyere.lps.ufrj.br/~fferreira/sapem/';
 	var urlArray = urlString.split('/');
-	var numPaciente = urlString[urlString.length - 2];
-	var numArgs = 3;
 	if (urlString.search("edit") != -1){
-		var numForm = parseInt(urlString[urlString.length - 4]);
-		numArgs++;
-	}else
-		var numForm = parseInt(urlString[urlString.length - 4]) + 1;
-	var urlbase = '';
-	for (var j = 0; j < urlArray.length - numArgs-1; j++)
-		urlbase += urlArray[j] + '/';
+		var fichaId = urlArray[urlArray.length-2];
+		var url = urlbase + 'ficha/' + fichaId + '/';
+	}else{
+		var numPaciente = urlArray[urlArray.length-2];
+		var numForm = parseInt(urlArray[urlArray.length-3],10) + 1;
+		var url = urlbase + 'patientLastRegister/' + numForm + '/' + numPaciente + '/';
+	}
 	$.ajax({
 		type: 'POST',
-		url: urlbase + '/patientLastRegister/' + numForm + '/' + numPaciente + '/',
+		url: url,
 		dataType: "html",
 		success: function(text){
 			if (window.DOMParser)
@@ -198,6 +157,8 @@ $(document).ready(function(){
 									if ($(el).text().search($(this).val()) != -1)
 										$(this).attr('checked',true);
 								});
+								if ($(el).text() == 'outros')
+									$('#outro_diagnostico_sim').removeAttr('disabled');
 							}
 							//Setting values
 							$('#'+tagname).val($(el).text());
@@ -617,8 +578,6 @@ $(document).ready(function(){
 
 /*---------------------------- Other logics -----------------------------*/
 
-	$('#dataPreenchimento').writePortugueseDate();
-
 	$('select').each(function(){
 		if ($(this).attr('id') != 'formulario')
 			$(this).attr('disabled',true);
@@ -638,7 +597,6 @@ $(document).ready(function(){
 	var tipoTriagem = '';
 	$.ajax({
 		type: 'POST',
-		url:'../../../patientLastRegister/' + numForm + '/' + numPaciente + '/',
 		dataType: "html",
 		success: function(text){
 			tipoTriagem = '';
@@ -770,7 +728,7 @@ $(document).ready(function(){
 	});
 /*---------------------------------------------------------------------------*/
 /*------------------------- Load Exames Form --------------------------------*/
-	var url=$(location).attr('href');
+	/*var url=$(location).attr('href');
 	var numForm = url[url.length - 4];
 	var numPatient = url[url.length - 2];
 	var sUrl='../../../patientLastRegister/' + numForm + '/' + numPatient + '/';
@@ -798,7 +756,7 @@ $(document).ready(function(){
 				$('#divExames').html("A busca não encontrou resultados");
 			}
 		}
-	});
+	});*/
 /*---------------------------------------------------------------------------*/
 /*-------------------------- Form Validation --------------------------------*/
 	$('#form_followup').validate();
