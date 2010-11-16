@@ -605,9 +605,9 @@ $(document).ready(function(){
 		}
 	});
 	var tipoTriagem = '';
-	if (triagem.search('Ambulatório') != -1)
+	if (triagem.search('Amb') != -1 || triagem.search('amb') != -1)
 		tipoTriagem = 'ambulatorio';
-	else if (triagem.search('Hospital') != -1)
+	else if (triagem.search('Hos') != -1 || triagem.search('hos'))
 		tipoTriagem = 'hospital';
 	$('#seguimentoClinico').change(function(){
 		var dep1 = new Array();
